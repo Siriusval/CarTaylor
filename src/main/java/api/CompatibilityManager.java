@@ -3,8 +3,8 @@ package api;
 import java.util.Set;
 
 /**
- * Interface CompatibilityManager
- * A public type to get manage (add and remove) constraints between parts
+ * Interface CompatibilityManager<br>
+ * A public type to get manage (add and remove) constraints between parts<br>
  *
  * @author Valentin Hulot
  */

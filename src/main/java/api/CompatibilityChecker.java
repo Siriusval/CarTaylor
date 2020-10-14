@@ -3,8 +3,8 @@ package api;
 import java.util.Set;
 
 /**
- * Interface CompatibilityChecker
- * A public type to get constraints (requirements and incompatibilities)
+ * Interface CompatibilityChecker<br>
+ * A public type to get constraints (requirements and incompatibilities)<br>
  * for a specific PartType
  *
  * @author Valentin Hulot

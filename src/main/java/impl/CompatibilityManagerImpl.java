@@ -9,6 +9,12 @@ import org.jgrapht.graph.SimpleGraph;
 
 import java.util.Set;
 
+/**
+ * Implementation class of CompatibilityManager
+ *
+ * @see CompatibilityManager
+ * @author Valentin Hulot
+ */
 public class CompatibilityManagerImpl implements CompatibilityManager {
 
     private Graph<PartType,DefaultEdge> requirements = new SimpleGraph<>(DefaultEdge.class);

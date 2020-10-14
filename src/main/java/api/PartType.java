@@ -1,8 +1,8 @@
 package api;
 
 /**
- * Interface of PartType
- * Contains the methods to implement in PartType
+ * Interface of PartType<br>
+ * Contains the methods to implement in PartType<br>
  * Allows to get the caracteristics of a PartType
  */
 public interface PartType {

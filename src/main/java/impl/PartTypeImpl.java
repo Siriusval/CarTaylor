@@ -3,6 +3,12 @@ package impl;
 import api.Category;
 import api.PartType;
 
+/**
+ * Implementation class of PartType
+ *
+ * @see PartType
+ * @author Valentin Hulot
+ */
 public class PartTypeImpl implements PartType {
 
     private String name;

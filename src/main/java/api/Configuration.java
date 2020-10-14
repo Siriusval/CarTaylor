@@ -5,8 +5,8 @@ import java.io.PrintStream;
 import java.util.Set;
 
 /**
- * Interface Configuration
- * Represent a configuration choosen by the customer
+ * Interface Configuration<br>
+ * Represent a configuration choosen by the customer<br>
  * Check the state of a configuration, select and unselect parts
  *
  * @author  Valentin Hulot

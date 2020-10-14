@@ -11,6 +11,12 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Logger;
 
+/**
+ * Test class for CompatibilityManagerImpl
+ *
+ * @see CompatibilityManagerImpl
+ * @author  Valentin Hulot
+ */
 class CompatibilityManagerClass {
 
     public static Logger log = Logger.getLogger(CompatibilityManagerClass.class.getName());

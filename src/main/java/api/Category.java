@@ -1,8 +1,8 @@
 package api;
 
 /**
- * Interface Category
- * A public type to organize part types in categories
+ * Interface Category<br>
+ * A public type to organize part types in categories<br>
  *
  * @author Valentin Hulot
  */

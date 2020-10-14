@@ -3,12 +3,12 @@ package api;
 import java.util.Set;
 
 /**
- * Interface Configurator
- * Expose the necessary methods to get :
- * _ the categories
- * _ variant
- * _ configuration
- * _ compatibilityChecker objects
+ * Interface Configurator<br>
+ * Expose the necessary methods to get :<br>
+ * _ the categories<br>
+ * _ variant<br>
+ * _ configuration<br>
+ * _ compatibilityChecker objects<br>
  *
  * @author  Valentin Hulot
  */

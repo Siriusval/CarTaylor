@@ -4,6 +4,12 @@ import api.*;
 
 import java.util.Set;
 
+/**
+ * Implementation class of interface Configurator
+ *
+ * @see Configurator
+ * @author Valentin Hulot
+ */
 public class ConfiguratorImpl implements Configurator {
     @Override
     public Set<Category> getCategories() {

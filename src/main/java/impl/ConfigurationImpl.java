@@ -8,6 +8,12 @@ import api.PartType;
 import java.io.PrintStream;
 import java.util.Set;
 
+/**
+ * Implementation class of interface  Configuration
+ *
+ * @see Configuration
+ * @author Valentin Hulot
+ */
 public class ConfigurationImpl implements Configuration {
 
     private Set<PartType> selectedParts;
