@@ -10,14 +10,19 @@ import api.Category;
  */
 public class CategoryImpl implements Category {
 
+    /** Name of the category */
     private String name;
 
+    /**
+     * Constructor for CategoryImpl
+     * @param name, the name of the category
+     */
     public CategoryImpl(String name) {
         this.name = name;
     }
 
     @Override
     public String getName() {
-        return null;
+        return this.name;
     }
 }

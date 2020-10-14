@@ -17,49 +17,66 @@ import java.util.Set;
  */
 public class CompatibilityManagerImpl implements CompatibilityManager {
 
-    private Graph<PartType,DefaultEdge> requirements = new SimpleGraph<>(DefaultEdge.class);
-    private Graph<PartType,DefaultEdge> incompatibilities = new SimpleGraph<>(DefaultEdge.class);
+    /** Graph that represents the requirements between parts */
+    private Graph<PartType,DefaultEdge> requirements;
+    /** Graph that represents the incompatibilites between parts */
+    private Graph<PartType,DefaultEdge> incompatibilities;
+    /** Object that allow to get connectivity aspects of the graph incompatibilities */
+    private ConnectivityInspector<PartType,DefaultEdge> incompatibilitiesConnectivityInspector;
+    /** Object that allow to get connectivity aspects of the graph incompatibilities */
+    private ConnectivityInspector<PartType,DefaultEdge> requirementsConnectivityInspector ;
 
+    /**
+     * Constructor for CompatibilityManagerImpl<br>
+     * Initialize the attributes
+     */
+    public CompatibilityManagerImpl() {
+        this.requirements =  new SimpleGraph<>(DefaultEdge.class);
+        this.incompatibilities = new SimpleGraph<>(DefaultEdge.class);
+        this.incompatibilitiesConnectivityInspector =  new ConnectivityInspector<>(incompatibilities);
+        this.requirementsConnectivityInspector = new ConnectivityInspector<>(requirements);
+    }
 
     @Override
     public void addIncompatibilities(PartType reference, Set<PartType> target) {
-        incompatibilities.addVertex(reference);
-        for(PartType el : target){
-            incompatibilities.addVertex(el);
-            incompatibilities.addEdge(reference,el);
+
+        this.incompatibilities.addVertex(reference); //Add a new vertex with this part (if it already exists, do nothing)
+
+        for(PartType el : target){ //For each partType, add a vertex, and an edge between it and the reference part
+            this.incompatibilities.addVertex(el);
+            this.incompatibilities.addEdge(reference,el);
         }
     }
 
     @Override
     public void removeIncompatibility(PartType reference, PartType target) {
-        incompatibilities.removeEdge(reference,target);
+        this.incompatibilities.removeEdge(reference,target);
     }
 
     @Override
     public void addRequirements(PartType reference, Set<PartType> target) {
-        requirements.addVertex(reference);
-        for(PartType el : target){
-            requirements.addVertex(el);
-            requirements.addEdge(reference,el);
+
+        this.requirements.addVertex(reference); //Add a new vertex with this part (if it already exists, do nothing)
+
+        for(PartType el : target){ //For each partType, add a vertex, and an edge between it and the reference part
+            this.requirements.addVertex(el);
+            this.requirements.addEdge(reference,el);
         }
     }
 
     @Override
     public void removeRequirement(PartType reference, PartType target) {
-        requirements.removeEdge(reference,target);
+        this.requirements.removeEdge(reference,target);
     }
 
     @Override
     public Set<PartType> getIncompatibilities(PartType reference) {
-        ConnectivityInspector<PartType,DefaultEdge> connectivityInspector = new ConnectivityInspector<>(incompatibilities);
-
-        return connectivityInspector.connectedSetOf(reference);
+        return this.incompatibilitiesConnectivityInspector.connectedSetOf(reference);
     }
 
     @Override
     public Set<PartType> getRequirements(PartType reference) {
-        ConnectivityInspector<PartType,DefaultEdge> connectivityInspector = new ConnectivityInspector<>(requirements);
 
-        return connectivityInspector.connectedSetOf(reference);
+        return this.requirementsConnectivityInspector.connectedSetOf(reference);
     }
 }
