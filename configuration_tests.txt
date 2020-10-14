@@ -1,0 +1,21 @@
+isValid
+1/ Creer config avec des pieces sans dependances 
+config.isValid doit renvoyer vrai
+
+2/ Creer config avec des pieces avec une requirement corrects
+config.isValid doitr renvoyer vrai
+
+3/ Creer config avec des pieces avec un incompatibilite
+config.isValid doit renvoyer faux
+
+----------------------------------------
+
+isComplete
+1/Ajouter une part pour chaque categorie
+isComplete doit renvoyer true
+
+2/Ajouter une part pour chaque categorie sauf une
+isComplete doit renvoyer false
+
+2/Ajouter une part pour chaque categorie sauf deux
+isComplete doit renvoyer false
