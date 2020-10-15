@@ -33,7 +33,7 @@ class CompatibilityManagerClass {
 
     @DisplayName("Add Incompatibility Test")
     @Test
-    public void addIncompatibility() {
+    public void addIncompatibility() throws Exception {
         log.info("Add Incompatibility Test");
 
         //Create EG100
