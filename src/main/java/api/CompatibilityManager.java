@@ -8,10 +8,10 @@ import java.util.Set;
  *
  * @author Valentin Hulot
  */
-public interface CompatibilityManager extends CompatibilityChecker {
+public interface CompatibilityManager extends CompatibilityChecker{
 
     /**
-     * Add a set of incompatibilites to a specific part
+     * Add a set of incompatibilities to a specific part
      * @param reference, the part to which we add the incompatibilities
      * @param target, the parts that are incompatibles with the reference
      */

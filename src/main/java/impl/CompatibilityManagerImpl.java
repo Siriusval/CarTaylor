@@ -7,6 +7,7 @@ import org.jgrapht.alg.connectivity.ConnectivityInspector;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.SimpleGraph;
 
+import java.util.Objects;
 import java.util.Set;
 
 /**
@@ -17,49 +18,121 @@ import java.util.Set;
  */
 public class CompatibilityManagerImpl implements CompatibilityManager {
 
-    private Graph<PartType,DefaultEdge> requirements = new SimpleGraph<>(DefaultEdge.class);
-    private Graph<PartType,DefaultEdge> incompatibilities = new SimpleGraph<>(DefaultEdge.class);
+    /** Graph that represents the requirements between parts */
+    private final Graph<PartType,DefaultEdge> requirements;
+    /** Graph that represents the incompatibilities between parts */
+    private final Graph<PartType,DefaultEdge> incompatibilities;
+    /** Object that allow to get connectivity aspects of the graph incompatibilities */
+    private final ConnectivityInspector<PartType,DefaultEdge> incompatibilitiesConnectivityInspector;
+    /** Object that allow to get connectivity aspects of the graph incompatibilities */
+    private final ConnectivityInspector<PartType,DefaultEdge> requirementsConnectivityInspector ;
 
+    /**
+     * Constructor for CompatibilityManagerImpl<br>
+     * Initialize the attributes
+     */
+    public CompatibilityManagerImpl() {
+        this.requirements =  new SimpleGraph<>(DefaultEdge.class);
+        this.incompatibilities = new SimpleGraph<>(DefaultEdge.class);
+        this.incompatibilitiesConnectivityInspector =  new ConnectivityInspector<>(incompatibilities);
+        this.requirementsConnectivityInspector = new ConnectivityInspector<>(requirements);
+    }
 
+    /**
+     * {@inheritDoc}
+     * @param reference, the part to which we add the incompatibilities
+     * @param target, the parts that are incompatibles with the reference
+     * @throws IllegalArgumentException if arguments are null or set is empty
+     */
     @Override
-    public void addIncompatibilities(PartType reference, Set<PartType> target) {
-        incompatibilities.addVertex(reference);
-        for(PartType el : target){
-            incompatibilities.addVertex(el);
-            incompatibilities.addEdge(reference,el);
+    public void addIncompatibilities(PartType reference, Set<PartType> target) throws IllegalArgumentException {
+
+        //Check if null or empty
+        Objects.requireNonNull(reference, "reference cannot be null");
+        Objects.requireNonNull(target,"target cannot be null");
+        if(target.isEmpty()){
+            throw new IllegalArgumentException("target cannot be empty");
+        }
+
+        this.incompatibilities.addVertex(reference); //Add a new vertex with this part (if it already exists, do nothing)
+
+        for(PartType el : target){ //For each partType, add a vertex, and an edge between it and the reference part
+            this.incompatibilities.addVertex(el);
+            this.incompatibilities.addEdge(reference,el);
         }
     }
 
+
+    /**
+     * {@inheritDoc}
+     * @param reference, the part to which we remove the incompatibility
+     * @param target, the part that is no longer incompatible with the reference
+     */
     @Override
     public void removeIncompatibility(PartType reference, PartType target) {
-        incompatibilities.removeEdge(reference,target);
+
+        Objects.requireNonNull(reference,"reference cannot be null");
+        Objects.requireNonNull(target,"target cannot be null");
+
+        this.incompatibilities.removeEdge(reference,target);
     }
 
+    /**
+     * {@inheritDoc}
+     * @param reference, the part to which we add the requirements
+     * @param target, the parts that are required with the reference
+     * @throws IllegalArgumentException if arguments are null or set is empty
+     */
     @Override
     public void addRequirements(PartType reference, Set<PartType> target) {
-        requirements.addVertex(reference);
-        for(PartType el : target){
-            requirements.addVertex(el);
-            requirements.addEdge(reference,el);
+
+        Objects.requireNonNull(reference,"reference cannot be null");
+        Objects.requireNonNull(target,"target cannot be null");
+        if(target.isEmpty()){
+            throw new IllegalArgumentException("target cannot be empty");
+        }
+
+        this.requirements.addVertex(reference); //Add a new vertex with this part (if it already exists, do nothing)
+
+        for(PartType el : target){ //For each partType, add a vertex, and an edge between it and the reference part
+            this.requirements.addVertex(el);
+            this.requirements.addEdge(reference,el);
         }
     }
 
+    /**
+     * {@inheritDoc}
+     * @param reference, the part to which we remove the requirement
+     * @param target, the part that is no longer required with the reference
+     */
     @Override
     public void removeRequirement(PartType reference, PartType target) {
-        requirements.removeEdge(reference,target);
+        Objects.requireNonNull(reference,"reference cannot be null");
+        Objects.requireNonNull(target,"target cannot be null");
+
+        this.requirements.removeEdge(reference,target);
     }
 
+    /**
+     * {@inheritDoc}
+     * @param reference, the PartType to be checked for incompatibilities
+     * @return the set of incompatible parts with the reference
+     *
+     */
     @Override
     public Set<PartType> getIncompatibilities(PartType reference) {
-        ConnectivityInspector<PartType,DefaultEdge> connectivityInspector = new ConnectivityInspector<>(incompatibilities);
-
-        return connectivityInspector.connectedSetOf(reference);
+        Objects.requireNonNull(reference,"reference cannot be null");
+        return this.incompatibilitiesConnectivityInspector.connectedSetOf(reference);
     }
 
+    /**
+     * {@inheritDoc}
+     * @param reference, the PartType to be checked for requirements
+     * @return the set of required parts with the reference
+     */
     @Override
     public Set<PartType> getRequirements(PartType reference) {
-        ConnectivityInspector<PartType,DefaultEdge> connectivityInspector = new ConnectivityInspector<>(requirements);
-
-        return connectivityInspector.connectedSetOf(reference);
+        Objects.requireNonNull(reference,"reference cannot be null");
+        return this.requirementsConnectivityInspector.connectedSetOf(reference);
     }
 }
