@@ -17,9 +17,9 @@ import java.util.logging.Logger;
  * @see CompatibilityManagerImpl
  * @author  Valentin Hulot
  */
-class CompatibilityManagerClass {
+public class CompatibilityManagerTest {
 
-    public static Logger log = Logger.getLogger(CompatibilityManagerClass.class.getName());
+    public static Logger log = Logger.getLogger(CompatibilityManagerTest.class.getName());
     public static CompatibilityManager cm;
 
     @BeforeAll

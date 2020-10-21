@@ -2,11 +2,6 @@ package impl;
 
 import api.CompatibilityManager;
 import api.PartType;
-import org.jgrapht.Graph;
-import org.jgrapht.alg.connectivity.ConnectivityInspector;
-import org.jgrapht.graph.DefaultEdge;
-import org.jgrapht.graph.SimpleGraph;
-
 import java.util.Objects;
 import java.util.Set;
 
@@ -16,26 +11,14 @@ import java.util.Set;
  * @see CompatibilityManager
  * @author Valentin Hulot
  */
-public class CompatibilityManagerImpl implements CompatibilityManager {
-
-    /** Graph that represents the requirements between parts */
-    private final Graph<PartType,DefaultEdge> requirements;
-    /** Graph that represents the incompatibilities between parts */
-    private final Graph<PartType,DefaultEdge> incompatibilities;
-    /** Object that allow to get connectivity aspects of the graph incompatibilities */
-    private final ConnectivityInspector<PartType,DefaultEdge> incompatibilitiesConnectivityInspector;
-    /** Object that allow to get connectivity aspects of the graph incompatibilities */
-    private final ConnectivityInspector<PartType,DefaultEdge> requirementsConnectivityInspector ;
+public class CompatibilityManagerImpl extends  CompatibilityCheckerImpl implements CompatibilityManager  {
 
     /**
      * Constructor for CompatibilityManagerImpl<br>
      * Initialize the attributes
      */
     public CompatibilityManagerImpl() {
-        this.requirements =  new SimpleGraph<>(DefaultEdge.class);
-        this.incompatibilities = new SimpleGraph<>(DefaultEdge.class);
-        this.incompatibilitiesConnectivityInspector =  new ConnectivityInspector<>(incompatibilities);
-        this.requirementsConnectivityInspector = new ConnectivityInspector<>(requirements);
+       super();
     }
 
     /**
@@ -113,26 +96,4 @@ public class CompatibilityManagerImpl implements CompatibilityManager {
         this.requirements.removeEdge(reference,target);
     }
 
-    /**
-     * {@inheritDoc}
-     * @param reference, the PartType to be checked for incompatibilities
-     * @return the set of incompatible parts with the reference
-     *
-     */
-    @Override
-    public Set<PartType> getIncompatibilities(PartType reference) {
-        Objects.requireNonNull(reference,"reference cannot be null");
-        return this.incompatibilitiesConnectivityInspector.connectedSetOf(reference);
-    }
-
-    /**
-     * {@inheritDoc}
-     * @param reference, the PartType to be checked for requirements
-     * @return the set of required parts with the reference
-     */
-    @Override
-    public Set<PartType> getRequirements(PartType reference) {
-        Objects.requireNonNull(reference,"reference cannot be null");
-        return this.requirementsConnectivityInspector.connectedSetOf(reference);
-    }
 }

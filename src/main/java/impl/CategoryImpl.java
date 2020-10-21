@@ -40,4 +40,28 @@ public class CategoryImpl implements Category {
         return this.name;
     }
 
+
+    /**
+     * Check if both Categories are equal
+     * @param o, the other object to check
+     * @return True if equal, else False
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CategoryImpl category = (CategoryImpl) o;
+
+        return name.equals(category.name);
+    }
+
+    /**
+     * Generate hashcode to compare two objects of this class
+     * @return the object hashcode
+     */
+    @Override
+    public int hashCode() {
+        return name.hashCode();
+    }
 }
