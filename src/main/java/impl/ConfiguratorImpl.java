@@ -39,6 +39,7 @@ public class ConfiguratorImpl implements Configurator {
         Objects.requireNonNull(variants,"variants cannot be null");
 
         this.configuration = configuration;
+        this.configuration.setConfiguratorRef(this);
         this.compatibilityChecker = compatibilityChecker;
         this.categories = categories;
         this.variants = variants;

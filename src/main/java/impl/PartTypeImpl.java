@@ -52,4 +52,31 @@ public class PartTypeImpl implements PartType {
     public Category getCategory() {
         return this.category;
     }
+
+    /**
+     * Check if both PartTypes are equal
+     * @param o, the other object to check
+     * @return True if equal, else False
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PartTypeImpl partType = (PartTypeImpl) o;
+
+        if (!name.equals(partType.name)) return false;
+        return category.equals(partType.category);
+    }
+
+    /**
+     * Generate hashcode to compare two objects of this class
+     * @return the object hashcode
+     */
+    @Override
+    public int hashCode() {
+        int result = name.hashCode();
+        result = 31 * result + category.hashCode();
+        return result;
+    }
 }

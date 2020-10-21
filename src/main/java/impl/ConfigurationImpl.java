@@ -20,20 +20,27 @@ public class ConfigurationImpl implements Configuration {
     /** Set of parts chosen in the configuration */
     private final Set<PartType> selectedParts;
     /** Reference to the configurator so we can check constraints on parts */
-    private final ConfiguratorImpl configuratorRef;
+    private ConfiguratorImpl configuratorRef;
 
 
     /**
      * Constructor for ConfigurationImpl
      * @param selectedParts, the set of selectedParts
-     * @param configuratorRef, the reference to the configurator
      */
-    public ConfigurationImpl(Set<PartType> selectedParts, ConfiguratorImpl configuratorRef) {
+    public ConfigurationImpl(Set<PartType> selectedParts) {
 
         Objects.requireNonNull(selectedParts,"selectedParts cannot be null");
-        Objects.requireNonNull(configuratorRef,"configuratorRef cannot be null");
+        //Objects.requireNonNull(configuratorRef,"configuratorRef cannot be null");
 
         this.selectedParts = selectedParts;
+    }
+
+    /**
+     * Set the ref of the configurator.<br>
+     * This class need configurator's methods to check on requirements
+     * @param configuratorRef, the reference to the configurator
+     */
+    public void setConfiguratorRef(ConfiguratorImpl configuratorRef) {
         this.configuratorRef = configuratorRef;
     }
 
@@ -160,4 +167,30 @@ public class ConfigurationImpl implements Configuration {
     }
     */
 
+    /**
+     * Check if both Configurations are equal
+     * @param o, the other object to check
+     * @return True if equal, else False
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        ConfigurationImpl that = (ConfigurationImpl) o;
+
+        if (!selectedParts.equals(that.selectedParts)) return false;
+        return configuratorRef.equals(that.configuratorRef);
+    }
+
+    /**
+     * Generate hashcode to compare two objects of this class
+     * @return the object hashcode
+     */
+    @Override
+    public int hashCode() {
+        int result = selectedParts.hashCode();
+        result = 31 * result + configuratorRef.hashCode();
+        return result;
+    }
 }
