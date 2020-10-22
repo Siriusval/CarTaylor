@@ -2,6 +2,7 @@ package impl;
 
 import api.Category;
 import api.Configuration;
+import api.Configurator;
 import api.PartType;
 
 import java.util.Collections;
@@ -20,29 +21,24 @@ public class ConfigurationImpl implements Configuration {
     /** Set of parts chosen in the configuration */
     private final Set<PartType> selectedParts;
     /** Reference to the configurator so we can check constraints on parts */
-    private ConfiguratorImpl configuratorRef;
+    private final ConfiguratorImpl configuratorRef;
+
 
 
     /**
      * Constructor for ConfigurationImpl
+     * @param configuratorRef, the configurator (need its operations for checking constraints)
      * @param selectedParts, the set of selectedParts
      */
-    public ConfigurationImpl(Set<PartType> selectedParts) {
+    public ConfigurationImpl(ConfiguratorImpl configuratorRef, Set<PartType> selectedParts) {
 
         Objects.requireNonNull(selectedParts,"selectedParts cannot be null");
-        //Objects.requireNonNull(configuratorRef,"configuratorRef cannot be null");
+        Objects.requireNonNull(configuratorRef,"configuratorRef cannot be null");
 
         this.selectedParts = selectedParts;
-    }
-
-    /**
-     * Set the ref of the configurator.<br>
-     * This class need configurator's methods to check on requirements
-     * @param configuratorRef, the reference to the configurator
-     */
-    public void setConfiguratorRef(ConfiguratorImpl configuratorRef) {
         this.configuratorRef = configuratorRef;
     }
+
 
     /**
      * {@inheritDoc}

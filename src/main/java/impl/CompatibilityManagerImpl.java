@@ -2,6 +2,16 @@ package impl;
 
 import api.CompatibilityManager;
 import api.PartType;
+import org.jgrapht.Graph;
+import org.jgrapht.alg.connectivity.ConnectivityInspector;
+import org.jgrapht.event.GraphChangeEvent;
+import org.jgrapht.event.GraphEdgeChangeEvent;
+import org.jgrapht.event.GraphVertexChangeEvent;
+import org.jgrapht.graph.DefaultDirectedGraph;
+import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.DefaultUndirectedGraph;
+import org.jgrapht.graph.SimpleGraph;
+
 import java.util.Objects;
 import java.util.Set;
 
@@ -11,14 +21,27 @@ import java.util.Set;
  * @see CompatibilityManager
  * @author Valentin Hulot
  */
-public class CompatibilityManagerImpl extends  CompatibilityCheckerImpl implements CompatibilityManager  {
+public class CompatibilityManagerImpl implements CompatibilityManager  {
+
+    /** Graph that represents the requirements between parts */
+    protected final Graph<PartType, DefaultEdge> requirements;
+    /** Graph that represents the incompatibilities between parts */
+    protected final Graph<PartType,DefaultEdge> incompatibilities;
+    /** Object that allow to get connectivity aspects of the graph incompatibilities */
+    protected final ConnectivityInspector<PartType,DefaultEdge> incompatibilitiesConnectivityInspector;
+    /** Object that allow to get connectivity aspects of the graph requirements */
+    protected final ConnectivityInspector<PartType,DefaultEdge> requirementsConnectivityInspector ;
+
 
     /**
      * Constructor for CompatibilityManagerImpl<br>
      * Initialize the attributes
      */
     public CompatibilityManagerImpl() {
-       super();
+        this.requirements =  new DefaultDirectedGraph<>(DefaultEdge.class); //Directed
+        this.incompatibilities = new DefaultUndirectedGraph<>(DefaultEdge.class); //Undirected
+        this.incompatibilitiesConnectivityInspector =  new ConnectivityInspector<>(incompatibilities);
+        this.requirementsConnectivityInspector = new ConnectivityInspector<>(requirements);
     }
 
     /**
@@ -29,6 +52,8 @@ public class CompatibilityManagerImpl extends  CompatibilityCheckerImpl implemen
      */
     @Override
     public void addIncompatibilities(PartType reference, Set<PartType> target) throws IllegalArgumentException {
+
+        // /!\ Symmétrique
 
         //Check if null or empty
         Objects.requireNonNull(reference, "reference cannot be null");
@@ -69,6 +94,8 @@ public class CompatibilityManagerImpl extends  CompatibilityCheckerImpl implemen
     @Override
     public void addRequirements(PartType reference, Set<PartType> target) {
 
+        // /!\ Non Symmétrique
+
         Objects.requireNonNull(reference,"reference cannot be null");
         Objects.requireNonNull(target,"target cannot be null");
         if(target.isEmpty()){
@@ -81,6 +108,7 @@ public class CompatibilityManagerImpl extends  CompatibilityCheckerImpl implemen
             this.requirements.addVertex(el);
             this.requirements.addEdge(reference,el);
         }
+        
     }
 
     /**
@@ -94,6 +122,30 @@ public class CompatibilityManagerImpl extends  CompatibilityCheckerImpl implemen
         Objects.requireNonNull(target,"target cannot be null");
 
         this.requirements.removeEdge(reference,target);
+    }
+
+
+    /**
+     * {@inheritDoc}
+     * @param reference, the PartType to be checked for incompatibilities
+     * @return the set of incompatible parts with the reference
+     *
+     */
+    @Override
+    public Set<PartType> getIncompatibilities(PartType reference) {
+        Objects.requireNonNull(reference,"reference cannot be null");
+        return this.incompatibilitiesConnectivityInspector.connectedSetOf(reference);
+    }
+
+    /**
+     * {@inheritDoc}
+     * @param reference, the PartType to be checked for requirements
+     * @return the set of required parts with the reference
+     */
+    @Override
+    public Set<PartType> getRequirements(PartType reference) {
+        Objects.requireNonNull(reference,"reference cannot be null");
+        return this.requirementsConnectivityInspector.connectedSetOf(reference);
     }
 
 }
