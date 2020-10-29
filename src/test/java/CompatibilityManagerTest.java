@@ -19,21 +19,21 @@ import java.util.logging.Logger;
  */
 public class CompatibilityManagerTest {
 
-    public static Logger log = Logger.getLogger(CompatibilityManagerTest.class.getName());
+    public static Logger log ;
     public static CompatibilityManager cm;
 
     @BeforeAll
-    public static void setup(
-
-    ) {
+    public static void setup() {
+        log = Logger.getLogger(CompatibilityManagerTest.class.getName());
         log.info("@BeforeAll - executes once before all test methods in this class");
         cm = new CompatibilityManagerImpl();
     }
 
 
+
     @DisplayName("Add Incompatibility Test")
     @Test
-    public void addIncompatibility() throws Exception {
+    public void addIncompatibility(){
         log.info("Add Incompatibility Test");
 
         //Create EG100
@@ -58,8 +58,6 @@ public class CompatibilityManagerTest {
 
 
     //TEMPLATE FUNCTIONS UNDER
-
-
     @BeforeEach
     public void init() {
         log.info("@BeforeEach - executes before each test method in this class");

@@ -3,7 +3,7 @@ package api;
 /**
  * Interface of PartType<br>
  * Contains the methods to implement in PartType<br>
- * Allows to get the caracteristics of a PartType
+ * Allows to get the characteristics of a PartType
  */
 public interface PartType {
 

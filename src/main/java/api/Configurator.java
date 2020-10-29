@@ -16,7 +16,7 @@ public interface Configurator {
 
     /**
      * Get all the categories
-     * @return, a set of Categories
+     * @return a set of Categories
      */
     Set<Category> getCategories();
 

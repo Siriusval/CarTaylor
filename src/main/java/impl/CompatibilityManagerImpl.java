@@ -2,6 +2,13 @@ package impl;
 
 import api.CompatibilityManager;
 import api.PartType;
+import org.jgrapht.Graph;
+import org.jgrapht.Graphs;
+import org.jgrapht.graph.DefaultDirectedGraph;
+import org.jgrapht.graph.DefaultEdge;
+import org.jgrapht.graph.DefaultUndirectedGraph;
+
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
@@ -11,14 +18,20 @@ import java.util.Set;
  * @see CompatibilityManager
  * @author Valentin Hulot
  */
-public class CompatibilityManagerImpl extends  CompatibilityCheckerImpl implements CompatibilityManager  {
+public class CompatibilityManagerImpl implements CompatibilityManager  {
+
+    /** Graph that represents the requirements between parts */
+    protected final Graph<PartType, DefaultEdge> requirements;
+    /** Graph that represents the incompatibilities between parts */
+    protected final Graph<PartType,DefaultEdge> incompatibilities;
 
     /**
      * Constructor for CompatibilityManagerImpl<br>
      * Initialize the attributes
      */
     public CompatibilityManagerImpl() {
-       super();
+        this.requirements =  new DefaultDirectedGraph<>(DefaultEdge.class); //Directed
+        this.incompatibilities = new DefaultUndirectedGraph<>(DefaultEdge.class); //Undirected
     }
 
     /**
@@ -28,7 +41,9 @@ public class CompatibilityManagerImpl extends  CompatibilityCheckerImpl implemen
      * @throws IllegalArgumentException if arguments are null or set is empty
      */
     @Override
-    public void addIncompatibilities(PartType reference, Set<PartType> target) throws IllegalArgumentException {
+    public void addIncompatibilities(PartType reference, Set<PartType> target) {
+
+        // /!\ Symmetric relation
 
         //Check if null or empty
         Objects.requireNonNull(reference, "reference cannot be null");
@@ -69,6 +84,8 @@ public class CompatibilityManagerImpl extends  CompatibilityCheckerImpl implemen
     @Override
     public void addRequirements(PartType reference, Set<PartType> target) {
 
+        // /!\ Not Symmetric relation
+
         Objects.requireNonNull(reference,"reference cannot be null");
         Objects.requireNonNull(target,"target cannot be null");
         if(target.isEmpty()){
@@ -81,6 +98,7 @@ public class CompatibilityManagerImpl extends  CompatibilityCheckerImpl implemen
             this.requirements.addVertex(el);
             this.requirements.addEdge(reference,el);
         }
+        
     }
 
     /**
@@ -94,6 +112,41 @@ public class CompatibilityManagerImpl extends  CompatibilityCheckerImpl implemen
         Objects.requireNonNull(target,"target cannot be null");
 
         this.requirements.removeEdge(reference,target);
+    }
+
+
+    /**
+     * {@inheritDoc}
+     * @param reference, the PartType to be checked for incompatibilities
+     * @return the set of incompatible parts with the reference
+     *
+     */
+    @Override
+    public Set<PartType> getIncompatibilities(PartType reference) {
+        Objects.requireNonNull(reference,"reference cannot be null");
+
+        if(this.incompatibilities.containsVertex(reference)){
+            Set<PartType> returnedSet = Graphs.neighborSetOf(this.incompatibilities,reference);
+            return Collections.unmodifiableSet(returnedSet);
+        }
+        return Collections.emptySet();
+    }
+
+    /**
+     * {@inheritDoc}
+     * @param reference, the PartType to be checked for requirements
+     * @return the set of required parts with the reference
+     */
+    @Override
+    public Set<PartType> getRequirements(PartType reference) {
+        Objects.requireNonNull(reference,"reference cannot be null");
+        if(this.requirements.containsVertex(reference)){
+
+            Set<PartType> returnedSet = Graphs.neighborSetOf(this.requirements,reference);
+            return Collections.unmodifiableSet(returnedSet);
+        }
+        return Collections.emptySet();
+
     }
 
 }

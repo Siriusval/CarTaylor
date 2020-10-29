@@ -1,12 +1,11 @@
     package api;
 
 
-import java.io.PrintStream;
 import java.util.Set;
 
 /**
  * Interface Configuration<br>
- * Represent a configuration choosen by the customer<br>
+ * Represent a configuration chosen by the customer<br>
  * Check the state of a configuration, select and unselect parts
  *
  * @author  Valentin Hulot
@@ -45,7 +44,7 @@ public interface Configuration {
     /**
      * For a specific category, get the part selected
      * @param category, the category of the part we want
-     * @return the part that belongs to this categ
+     * @return the part that belongs to this category
      */
     PartType getSelectionForCategory(Category category);
 
@@ -59,11 +58,5 @@ public interface Configuration {
      * Remove all the part of the configuration
      */
     void clear();
-
-    /**
-     * Print description of the configuration
-     * @param stream, the stream that print the configuration
-     */
-    //void printDescription(PrintStream stream) ;
 
 }

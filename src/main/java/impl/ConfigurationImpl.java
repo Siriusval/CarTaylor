@@ -20,27 +20,20 @@ public class ConfigurationImpl implements Configuration {
     /** Set of parts chosen in the configuration */
     private final Set<PartType> selectedParts;
     /** Reference to the configurator so we can check constraints on parts */
-    private ConfiguratorImpl configuratorRef;
+    private final ConfiguratorImpl configuratorRef;
 
 
     /**
      * Constructor for ConfigurationImpl
+     * @param configuratorRef, the configurator (need its operations for checking constraints)
      * @param selectedParts, the set of selectedParts
      */
-    public ConfigurationImpl(Set<PartType> selectedParts) {
+    public ConfigurationImpl(ConfiguratorImpl configuratorRef, Set<PartType> selectedParts) {
 
         Objects.requireNonNull(selectedParts,"selectedParts cannot be null");
-        //Objects.requireNonNull(configuratorRef,"configuratorRef cannot be null");
+        Objects.requireNonNull(configuratorRef,"configuratorRef cannot be null");
 
         this.selectedParts = selectedParts;
-    }
-
-    /**
-     * Set the ref of the configurator.<br>
-     * This class need configurator's methods to check on requirements
-     * @param configuratorRef, the reference to the configurator
-     */
-    public void setConfiguratorRef(ConfiguratorImpl configuratorRef) {
         this.configuratorRef = configuratorRef;
     }
 
@@ -56,22 +49,23 @@ public class ConfigurationImpl implements Configuration {
             return false;
         }
 
-        //Check requirements
+        //Check constraints
         for (PartType part : this.selectedParts){ //For each part
+            //Check requirements
             Set<PartType> requirements = this.configuratorRef.getCompatibilityChecker().getRequirements(part);
 
             if (!this.selectedParts.containsAll(requirements)){ //check if requirements are missing in the config
                 return false;
             }
-        }
 
-        //Check incompatibilities
-        for (PartType part : this.selectedParts){ //For each part
+            //Check incompatibilities
             Set<PartType> incompatibilities = this.configuratorRef.getCompatibilityChecker().getIncompatibilities(part);
+
 
             if (!Collections.disjoint(this.selectedParts,incompatibilities)) { //check if incompatibilities are in the config
                 return false;
             }
+
         }
 
         return true;
@@ -156,16 +150,17 @@ public class ConfigurationImpl implements Configuration {
     public void clear() {
         this.selectedParts.clear();
     }
-/*
-    @Override
-    public void printDescription(PrintStream stream) {
-        stream.println("isValid : "+this.isValid());
-        stream.println("isComplete : "+this.isComplete());
-        for (Part part : selectedParts){
-            stream.println(part.printDescription());
+
+    /*
+        @Override
+        public void printDescription(PrintStream stream) {
+            stream.println("isValid : "+this.isValid());
+            stream.println("isComplete : "+this.isComplete());
+            for (Part part : selectedParts){
+                stream.println(part.printDescription());
+            }
         }
-    }
-    */
+        */
 
     /**
      * Check if both Configurations are equal
