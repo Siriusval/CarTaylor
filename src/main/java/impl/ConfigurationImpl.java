@@ -2,7 +2,6 @@ package impl;
 
 import api.Category;
 import api.Configuration;
-import api.Configurator;
 import api.PartType;
 
 import java.util.Collections;
@@ -24,7 +23,6 @@ public class ConfigurationImpl implements Configuration {
     private final ConfiguratorImpl configuratorRef;
 
 
-
     /**
      * Constructor for ConfigurationImpl
      * @param configuratorRef, the configurator (need its operations for checking constraints)
@@ -38,7 +36,6 @@ public class ConfigurationImpl implements Configuration {
         this.selectedParts = selectedParts;
         this.configuratorRef = configuratorRef;
     }
-
 
     /**
      * {@inheritDoc}
@@ -153,16 +150,17 @@ public class ConfigurationImpl implements Configuration {
     public void clear() {
         this.selectedParts.clear();
     }
-/*
-    @Override
-    public void printDescription(PrintStream stream) {
-        stream.println("isValid : "+this.isValid());
-        stream.println("isComplete : "+this.isComplete());
-        for (Part part : selectedParts){
-            stream.println(part.printDescription());
+
+    /*
+        @Override
+        public void printDescription(PrintStream stream) {
+            stream.println("isValid : "+this.isValid());
+            stream.println("isComplete : "+this.isComplete());
+            for (Part part : selectedParts){
+                stream.println(part.printDescription());
+            }
         }
-    }
-    */
+        */
 
     /**
      * Check if both Configurations are equal

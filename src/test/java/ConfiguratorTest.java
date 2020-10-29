@@ -10,18 +10,26 @@ import java.util.Objects;
 import java.util.Set;
 import java.util.logging.Logger;
 
+/**
+ * Test class for Configurator class and methods
+ */
 public class ConfiguratorTest {
 
-    private static Logger log = Logger.getLogger(ConfiguratorTest.class.getName());
+    private static Logger log ;
     private static Configurator configurator;
 
     @BeforeAll
     public static void setup(){
+        log = Logger.getLogger(ConfiguratorTest.class.getName());
         log.info("@BeforeAll");
         //Configurator
         configurator = new ConfiguratorImpl();
     }
 
+    /**
+     * Check getCategories() method <br>
+     * Assert true if all the basics categories are contained
+     */
     @DisplayName("Get Categories")
     @Test
     public void getCategoriesTest(){
@@ -34,7 +42,10 @@ public class ConfiguratorTest {
         assertTrue(configurator.getCategories().containsAll(Set.of(engineCategory,transmissionCategory,exteriorCategory,interiorCategory)));
     }
 
-
+    /**
+     * Check getVariants() method<br>
+     * Assert true if it returns all the variant for a category
+     */
     @DisplayName("Get Variants")
     @Test
     public void getVariantsTest(){
@@ -52,6 +63,10 @@ public class ConfiguratorTest {
     }
 
 
+    /**
+     * Check getConfiguration() method<br>
+     * Assert that the returned object is not null
+     */
     @DisplayName("Get Configuration")
     @Test
     public void getConfigurationTest(){
@@ -59,10 +74,13 @@ public class ConfiguratorTest {
 
         Configuration conf = configurator.getConfiguration();
 
-        assertTrue(!Objects.isNull(conf) && conf instanceof Configuration);
+        assertFalse(Objects.isNull(conf));
     }
 
-
+    /**
+     * Check getCompatibilityChecker() method<br>
+     * Assert that the returned object is not null
+     */
     @DisplayName("Get Compatibility Checker")
     @Test
     public void getCompatibilityCheckerTest(){
@@ -70,7 +88,7 @@ public class ConfiguratorTest {
 
         CompatibilityChecker cc = configurator.getCompatibilityChecker();
 
-        assertTrue(!Objects.isNull(cc) && cc instanceof CompatibilityChecker);
+        assertFalse(Objects.isNull(cc));
     }
 
 }

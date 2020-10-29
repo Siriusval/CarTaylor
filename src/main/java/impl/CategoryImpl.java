@@ -1,7 +1,6 @@
 package impl;
 
 import api.Category;
-
 import java.util.Objects;
 
 /**
@@ -25,7 +24,7 @@ public class CategoryImpl implements Category {
     public CategoryImpl(String name) throws IllegalArgumentException {
         Objects.requireNonNull(name);
         if(name.isBlank()){
-            throw new IllegalArgumentException("String must not be empty");
+            throw new IllegalArgumentException("String cannot be empty");
         }
 
         this.name = name;

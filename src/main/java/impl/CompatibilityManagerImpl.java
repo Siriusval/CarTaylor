@@ -4,14 +4,9 @@ import api.CompatibilityManager;
 import api.PartType;
 import org.jgrapht.Graph;
 import org.jgrapht.Graphs;
-import org.jgrapht.alg.connectivity.ConnectivityInspector;
-import org.jgrapht.event.GraphChangeEvent;
-import org.jgrapht.event.GraphEdgeChangeEvent;
-import org.jgrapht.event.GraphVertexChangeEvent;
 import org.jgrapht.graph.DefaultDirectedGraph;
 import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.DefaultUndirectedGraph;
-import org.jgrapht.graph.SimpleGraph;
 
 import java.util.Collections;
 import java.util.Objects;
@@ -29,11 +24,6 @@ public class CompatibilityManagerImpl implements CompatibilityManager  {
     protected final Graph<PartType, DefaultEdge> requirements;
     /** Graph that represents the incompatibilities between parts */
     protected final Graph<PartType,DefaultEdge> incompatibilities;
-    /** Object that allow to get connectivity aspects of the graph incompatibilities */
-    //protected final ConnectivityInspector<PartType,DefaultEdge> incompatibilitiesConnectivityInspector;
-    /** Object that allow to get connectivity aspects of the graph requirements */
-    //protected final ConnectivityInspector<PartType,DefaultEdge> requirementsConnectivityInspector ;
-
 
     /**
      * Constructor for CompatibilityManagerImpl<br>
@@ -42,9 +32,6 @@ public class CompatibilityManagerImpl implements CompatibilityManager  {
     public CompatibilityManagerImpl() {
         this.requirements =  new DefaultDirectedGraph<>(DefaultEdge.class); //Directed
         this.incompatibilities = new DefaultUndirectedGraph<>(DefaultEdge.class); //Undirected
-
-        //this.incompatibilitiesConnectivityInspector =  new ConnectivityInspector<>(incompatibilities);
-        //this.requirementsConnectivityInspector = new ConnectivityInspector<>(requirements);
     }
 
     /**
@@ -54,9 +41,9 @@ public class CompatibilityManagerImpl implements CompatibilityManager  {
      * @throws IllegalArgumentException if arguments are null or set is empty
      */
     @Override
-    public void addIncompatibilities(PartType reference, Set<PartType> target) throws IllegalArgumentException {
+    public void addIncompatibilities(PartType reference, Set<PartType> target) {
 
-        // /!\ Symmétrique
+        // /!\ Symmetric relation
 
         //Check if null or empty
         Objects.requireNonNull(reference, "reference cannot be null");
@@ -97,7 +84,7 @@ public class CompatibilityManagerImpl implements CompatibilityManager  {
     @Override
     public void addRequirements(PartType reference, Set<PartType> target) {
 
-        // /!\ Non Symmétrique
+        // /!\ Not Symmetric relation
 
         Objects.requireNonNull(reference,"reference cannot be null");
         Objects.requireNonNull(target,"target cannot be null");
@@ -139,16 +126,10 @@ public class CompatibilityManagerImpl implements CompatibilityManager  {
         Objects.requireNonNull(reference,"reference cannot be null");
 
         if(this.incompatibilities.containsVertex(reference)){
-
-            // Set<PartType> returnedSet = this.incompatibilitiesConnectivityInspector.connectedSetOf(reference);
             Set<PartType> returnedSet = Graphs.neighborSetOf(this.incompatibilities,reference);
-
-            //returnedSet.remove(reference); //because a vertex got a self-loop
             return Collections.unmodifiableSet(returnedSet);
         }
-
         return Collections.emptySet();
-
     }
 
     /**
@@ -161,15 +142,9 @@ public class CompatibilityManagerImpl implements CompatibilityManager  {
         Objects.requireNonNull(reference,"reference cannot be null");
         if(this.requirements.containsVertex(reference)){
 
-            //Set<PartType> returnedSet = this.requirementsConnectivityInspector.connectedSetOf(reference);
-            //returnedSet.remove(reference); //because a vertex got a self-loop
-
             Set<PartType> returnedSet = Graphs.neighborSetOf(this.requirements,reference);
-
             return Collections.unmodifiableSet(returnedSet);
-
         }
-
         return Collections.emptySet();
 
     }

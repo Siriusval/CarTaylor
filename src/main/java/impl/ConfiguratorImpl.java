@@ -97,7 +97,7 @@ public class ConfiguratorImpl implements Configurator {
         variants.add(IH);
         variants.add(IS);
 
-        //Incompatiblities
+        //Incompatibilities
         compatibilityManager.addIncompatibilities(TA5,Set.of(EG100));
         compatibilityManager.addIncompatibilities(TSF7,Set.of(EG100,EG133,ED110));
         compatibilityManager.addIncompatibilities(XC,Set.of(EG210));
