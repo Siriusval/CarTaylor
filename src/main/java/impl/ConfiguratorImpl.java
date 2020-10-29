@@ -27,20 +27,11 @@ public class ConfiguratorImpl implements Configurator {
     private final Set<PartType> variants;
 
 
-
     /**
      * Constructor for ConfiguratorImpl
-     * @param compatibilityChecker, the compatibilityChecker
-     * @param categories, set of categories
-     * @param variants, set of variants/partTypes
      */
-    public ConfiguratorImpl(CompatibilityManager compatibilityManager) {
-
-        Objects.requireNonNull(compatibilityManager,"compatibilityManager cannot be null");
-
-        this.compatibilityManager = compatibilityManager;
-
-
+    public ConfiguratorImpl() {
+        this.compatibilityManager = new CompatibilityManagerImpl();
         this.categories = new HashSet<>();
         this.variants = new HashSet<>();
         init();
@@ -106,7 +97,7 @@ public class ConfiguratorImpl implements Configurator {
         variants.add(IH);
         variants.add(IS);
 
-        //Incopatiblities
+        //Incompatiblities
         compatibilityManager.addIncompatibilities(TA5,Set.of(EG100));
         compatibilityManager.addIncompatibilities(TSF7,Set.of(EG100,EG133,ED110));
         compatibilityManager.addIncompatibilities(XC,Set.of(EG210));
@@ -141,7 +132,7 @@ public class ConfiguratorImpl implements Configurator {
     public Set<PartType> getVariants(Category category) {
         Objects.requireNonNull(category,"category cannot be null");
 
-        return this.variants.stream().filter(v -> v.getCategory()== category).collect(Collectors.toUnmodifiableSet());
+        return this.variants.stream().filter(v -> v.getCategory().equals(category)).collect(Collectors.toUnmodifiableSet());
     }
 
     /**

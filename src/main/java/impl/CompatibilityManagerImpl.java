@@ -3,6 +3,7 @@ package impl;
 import api.CompatibilityManager;
 import api.PartType;
 import org.jgrapht.Graph;
+import org.jgrapht.Graphs;
 import org.jgrapht.alg.connectivity.ConnectivityInspector;
 import org.jgrapht.event.GraphChangeEvent;
 import org.jgrapht.event.GraphEdgeChangeEvent;
@@ -12,6 +13,7 @@ import org.jgrapht.graph.DefaultEdge;
 import org.jgrapht.graph.DefaultUndirectedGraph;
 import org.jgrapht.graph.SimpleGraph;
 
+import java.util.Collections;
 import java.util.Objects;
 import java.util.Set;
 
@@ -28,9 +30,9 @@ public class CompatibilityManagerImpl implements CompatibilityManager  {
     /** Graph that represents the incompatibilities between parts */
     protected final Graph<PartType,DefaultEdge> incompatibilities;
     /** Object that allow to get connectivity aspects of the graph incompatibilities */
-    protected final ConnectivityInspector<PartType,DefaultEdge> incompatibilitiesConnectivityInspector;
+    //protected final ConnectivityInspector<PartType,DefaultEdge> incompatibilitiesConnectivityInspector;
     /** Object that allow to get connectivity aspects of the graph requirements */
-    protected final ConnectivityInspector<PartType,DefaultEdge> requirementsConnectivityInspector ;
+    //protected final ConnectivityInspector<PartType,DefaultEdge> requirementsConnectivityInspector ;
 
 
     /**
@@ -40,8 +42,9 @@ public class CompatibilityManagerImpl implements CompatibilityManager  {
     public CompatibilityManagerImpl() {
         this.requirements =  new DefaultDirectedGraph<>(DefaultEdge.class); //Directed
         this.incompatibilities = new DefaultUndirectedGraph<>(DefaultEdge.class); //Undirected
-        this.incompatibilitiesConnectivityInspector =  new ConnectivityInspector<>(incompatibilities);
-        this.requirementsConnectivityInspector = new ConnectivityInspector<>(requirements);
+
+        //this.incompatibilitiesConnectivityInspector =  new ConnectivityInspector<>(incompatibilities);
+        //this.requirementsConnectivityInspector = new ConnectivityInspector<>(requirements);
     }
 
     /**
@@ -134,7 +137,18 @@ public class CompatibilityManagerImpl implements CompatibilityManager  {
     @Override
     public Set<PartType> getIncompatibilities(PartType reference) {
         Objects.requireNonNull(reference,"reference cannot be null");
-        return this.incompatibilitiesConnectivityInspector.connectedSetOf(reference);
+
+        if(this.incompatibilities.containsVertex(reference)){
+
+            // Set<PartType> returnedSet = this.incompatibilitiesConnectivityInspector.connectedSetOf(reference);
+            Set<PartType> returnedSet = Graphs.neighborSetOf(this.incompatibilities,reference);
+
+            //returnedSet.remove(reference); //because a vertex got a self-loop
+            return Collections.unmodifiableSet(returnedSet);
+        }
+
+        return Collections.emptySet();
+
     }
 
     /**
@@ -145,7 +159,19 @@ public class CompatibilityManagerImpl implements CompatibilityManager  {
     @Override
     public Set<PartType> getRequirements(PartType reference) {
         Objects.requireNonNull(reference,"reference cannot be null");
-        return this.requirementsConnectivityInspector.connectedSetOf(reference);
+        if(this.requirements.containsVertex(reference)){
+
+            //Set<PartType> returnedSet = this.requirementsConnectivityInspector.connectedSetOf(reference);
+            //returnedSet.remove(reference); //because a vertex got a self-loop
+
+            Set<PartType> returnedSet = Graphs.neighborSetOf(this.requirements,reference);
+
+            return Collections.unmodifiableSet(returnedSet);
+
+        }
+
+        return Collections.emptySet();
+
     }
 
 }

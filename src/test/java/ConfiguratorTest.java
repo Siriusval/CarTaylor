@@ -6,84 +6,72 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 import java.util.logging.Logger;
 
 public class ConfiguratorTest {
 
     private static Logger log = Logger.getLogger(ConfiguratorTest.class.getName());
-    private static ConfigurationImpl configuration;
-    private static CompatibilityChecker compatibilityChecker;
+    private static Configurator configurator;
 
     @BeforeAll
     public static void setup(){
         log.info("@BeforeAll");
-        //Configuration
-        Set<PartType> selectedParts = new HashSet<>();
-        configuration = new ConfigurationImpl(selectedParts);
-
         //Configurator
-        compatibilityChecker = new CompatibilityCheckerImpl();
+        configurator = new ConfiguratorImpl();
     }
 
     @DisplayName("Get Categories")
     @Test
     public void getCategoriesTest(){
         log.info("Get Categories");
-        Category c1 = new CategoryImpl("engine");
-        Set<Category> categories = new HashSet<>();
-        categories.add(c1);
+        Category engineCategory = new CategoryImpl("engine");
+        Category transmissionCategory = new CategoryImpl("transmission");
+        Category exteriorCategory = new CategoryImpl("exterior");
+        Category interiorCategory = new CategoryImpl("interior");
 
-        Set<PartType> variants = new HashSet<>();
-
-        Configurator configurator = new ConfiguratorImpl(configuration, compatibilityChecker, categories, variants);
-        assertTrue(configurator.getCategories().contains(c1));
+        assertTrue(configurator.getCategories().containsAll(Set.of(engineCategory,transmissionCategory,exteriorCategory,interiorCategory)));
     }
+
 
     @DisplayName("Get Variants")
     @Test
     public void getVariantsTest(){
         log.info("Get Variants");
 
-        Category c1 = new CategoryImpl("engine");
-        Set<Category> categories = new HashSet<>();
-        categories.add(c1);
+        Category exteriorCategory = new CategoryImpl("exterior");
+        PartType p1 = new PartTypeImpl("XC",exteriorCategory);
+        PartType p2 = new PartTypeImpl("XM",exteriorCategory);
+        PartType p3 = new PartTypeImpl("XS",exteriorCategory);
+        Set<PartType> testSet = Set.of(p1,p2,p3);
 
-        Set<PartType> variants = new HashSet<>();
-        PartType v1 = new PartTypeImpl("EG100",c1);
-        variants.add(v1);
+        Set<PartType> parts = configurator.getVariants(exteriorCategory);
 
-        Configurator configurator = new ConfiguratorImpl(configuration, compatibilityChecker, categories, variants);
-        assertTrue(configurator.getVariants(c1).contains(v1));
+        assertTrue(parts.containsAll(testSet));
     }
+
 
     @DisplayName("Get Configuration")
     @Test
     public void getConfigurationTest(){
         log.info("Get Configuration");
 
-        Set<Category> categories = new HashSet<>();
-        Set<PartType> variants = new HashSet<>();
+        Configuration conf = configurator.getConfiguration();
 
-        Configurator configurator = new ConfiguratorImpl(configuration, compatibilityChecker, categories, variants);
-
-        assertTrue(configurator.getConfiguration().equals(configuration));
+        assertTrue(!Objects.isNull(conf) && conf instanceof Configuration);
     }
+
 
     @DisplayName("Get Compatibility Checker")
     @Test
     public void getCompatibilityCheckerTest(){
         log.info("Get Compatibility Checker");
 
-        Set<Category> categories = new HashSet<>();
-        Set<PartType> variants = new HashSet<>();
+        CompatibilityChecker cc = configurator.getCompatibilityChecker();
 
-        Configurator configurator = new ConfiguratorImpl(configuration, compatibilityChecker, categories, variants);
-
-        assertTrue(configurator.getCompatibilityChecker().equals(compatibilityChecker));
+        assertTrue(!Objects.isNull(cc) && cc instanceof CompatibilityChecker);
     }
-
 
 }
 

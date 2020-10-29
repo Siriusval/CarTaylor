@@ -52,22 +52,23 @@ public class ConfigurationImpl implements Configuration {
             return false;
         }
 
-        //Check requirements
+        //Check constraints
         for (PartType part : this.selectedParts){ //For each part
+            //Check requirements
             Set<PartType> requirements = this.configuratorRef.getCompatibilityChecker().getRequirements(part);
 
             if (!this.selectedParts.containsAll(requirements)){ //check if requirements are missing in the config
                 return false;
             }
-        }
 
-        //Check incompatibilities
-        for (PartType part : this.selectedParts){ //For each part
+            //Check incompatibilities
             Set<PartType> incompatibilities = this.configuratorRef.getCompatibilityChecker().getIncompatibilities(part);
+
 
             if (!Collections.disjoint(this.selectedParts,incompatibilities)) { //check if incompatibilities are in the config
                 return false;
             }
+
         }
 
         return true;
