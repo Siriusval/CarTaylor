@@ -39,15 +39,10 @@ public class ConfigurationImpl implements Configuration {
 
     /**
      * {@inheritDoc}
-     * @return if config is valid (aka. contains requirements, don't contains incompatibilities, and is Complete)
+     * @return if config is valid (aka. contains requirements, don't contains incompatibilities)
      */
     @Override
     public boolean isValid() {
-
-        //Check is complete
-        if (!this.isComplete()){
-            return false;
-        }
 
         //Check constraints
         for (PartType part : this.selectedParts){ //For each part

@@ -91,13 +91,13 @@ public class ConfigurationTest {
     }
 
     /**
-     * Test a valid configuration (complete + incompatibilities and requirements ok)<br>
-     * Assert that the configuration is valid
+     * Test a valid configuration ( incompatibilities and requirements ok)<br>
+     * Assert that the configuration is valid (even if not complete)
      */
     @DisplayName("is Valid")
     @Test
     public void isValidTest() {
-        List<String> partsToChoose= Arrays.asList("EG100","TM5","XC","IN");
+        List<String> partsToChoose= Arrays.asList("EG100","TM5","XC");
 
         for(Category cat : configurator.getCategories()){
             for(PartType part : configurator.getVariants(cat)){
