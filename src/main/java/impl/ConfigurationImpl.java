@@ -157,11 +157,12 @@ public class ConfigurationImpl implements Configuration {
         }
         */
 
-    /**
+    /*
      * Check if both Configurations are equal
      * @param o, the other object to check
      * @return True if equal, else False
      */
+    /*
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -172,15 +173,18 @@ public class ConfigurationImpl implements Configuration {
         if (!selectedParts.equals(that.selectedParts)) return false;
         return configuratorRef.equals(that.configuratorRef);
     }
+    */
 
-    /**
+    /*
      * Generate hashcode to compare two objects of this class
      * @return the object hashcode
      */
+    /*
     @Override
     public int hashCode() {
         int result = selectedParts.hashCode();
         result = 31 * result + configuratorRef.hashCode();
         return result;
     }
+    */
 }

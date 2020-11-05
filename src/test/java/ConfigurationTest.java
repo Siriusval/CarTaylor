@@ -13,6 +13,9 @@ import java.util.logging.Logger;
 
 /**
  * Test Class for Configuration Methods
+ *
+ * @see Configuration
+ * @author Valentin Hulot
  */
 public class ConfigurationTest {
     /** Logger to print in console */
@@ -231,4 +234,12 @@ public class ConfigurationTest {
         assertEquals(selectedPartForEngine,configuration.getSelectionForCategory(selectedCategory));
     }
 
+    /**
+     * Test getSelectionForCategory when the Part has not been selected yet
+     */
+    @Test
+    void getNoSelectionForCategory() {
+        assertNull(configuration.getSelectionForCategory(new CategoryImpl("engine")));
+
+    }
 }

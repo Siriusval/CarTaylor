@@ -12,6 +12,9 @@ import java.util.logging.Logger;
 
 /**
  * Test class for Configurator class and methods
+ *
+ * @see Configurator
+ * @author Valentin Hulot
  */
 public class ConfiguratorTest {
 

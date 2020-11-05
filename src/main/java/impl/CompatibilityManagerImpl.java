@@ -126,8 +126,7 @@ public class CompatibilityManagerImpl implements CompatibilityManager  {
         Objects.requireNonNull(reference,"reference cannot be null");
 
         if(this.incompatibilities.containsVertex(reference)){
-            Set<PartType> returnedSet = Graphs.neighborSetOf(this.incompatibilities,reference);
-            return Collections.unmodifiableSet(returnedSet);
+            return Set.copyOf(Graphs.successorListOf(this.incompatibilities,reference)); //copyOf return an unmodifiable set
         }
         return Collections.emptySet();
     }
@@ -141,9 +140,7 @@ public class CompatibilityManagerImpl implements CompatibilityManager  {
     public Set<PartType> getRequirements(PartType reference) {
         Objects.requireNonNull(reference,"reference cannot be null");
         if(this.requirements.containsVertex(reference)){
-
-            Set<PartType> returnedSet = Graphs.neighborSetOf(this.requirements,reference);
-            return Collections.unmodifiableSet(returnedSet);
+            return  Set.copyOf(Graphs.successorListOf(this.requirements,reference)); //copyOf return an unmodifiable set
         }
         return Collections.emptySet();
 

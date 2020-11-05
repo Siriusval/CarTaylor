@@ -47,6 +47,7 @@ public interface Configuration {
      * @return the part that belongs to this category
      */
     PartType getSelectionForCategory(Category category);
+    //TODO : in v2, return Optional
 
     /**
      * Unselect a part
