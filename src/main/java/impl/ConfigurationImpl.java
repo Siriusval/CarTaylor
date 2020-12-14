@@ -2,12 +2,10 @@ package impl;
 
 import api.Category;
 import api.Configuration;
+import api.Part;
 import api.PartType;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 
 /**
  * Implementation class of interface  Configuration
@@ -18,7 +16,7 @@ import java.util.Set;
 public class ConfigurationImpl implements Configuration {
 
     /** Set of parts chosen in the configuration */
-    private final Set<PartType> selectedParts;
+    private final Set<Part> selectedParts;
     /** Reference to the configurator so we can check constraints on parts */
     private final ConfiguratorImpl configuratorRef;
 
@@ -28,7 +26,7 @@ public class ConfigurationImpl implements Configuration {
      * @param configuratorRef, the configurator (need its operations for checking constraints)
      * @param selectedParts, the set of selectedParts
      */
-    public ConfigurationImpl(ConfiguratorImpl configuratorRef, Set<PartType> selectedParts) {
+    public ConfigurationImpl(ConfiguratorImpl configuratorRef, Set<Part> selectedParts) {
 
         Objects.requireNonNull(selectedParts,"selectedParts cannot be null");
         Objects.requireNonNull(configuratorRef,"configuratorRef cannot be null");
@@ -45,19 +43,23 @@ public class ConfigurationImpl implements Configuration {
     public boolean isValid() {
 
         //Check constraints
-        for (PartType part : this.selectedParts){ //For each part
+        for (Part part : this.selectedParts){ //For each part
             //Check requirements
-            Set<PartType> requirements = this.configuratorRef.getCompatibilityChecker().getRequirements(part);
+            Set<PartType> requirements = this.configuratorRef.getCompatibilityChecker().getRequirements(part.getType());
 
-            if (!this.selectedParts.containsAll(requirements)){ //check if requirements are missing in the config
+            //get all partType from part
+            Set<PartType> selectedPartTypes = new HashSet<>();
+            getSelectedParts().forEach( (p) -> selectedPartTypes.add(p.getType()));
+
+            if (!selectedPartTypes.containsAll(requirements)){ //check if requirements are missing in the config
                 return false;
             }
 
             //Check incompatibilities
-            Set<PartType> incompatibilities = this.configuratorRef.getCompatibilityChecker().getIncompatibilities(part);
+            Set<PartType> incompatibilities = this.configuratorRef.getCompatibilityChecker().getIncompatibilities(part.getType());
 
 
-            if (!Collections.disjoint(this.selectedParts,incompatibilities)) { //check if incompatibilities are in the config
+            if (!Collections.disjoint(selectedPartTypes,incompatibilities)) { //check if incompatibilities are in the config
                 return false;
             }
 
@@ -75,7 +77,7 @@ public class ConfigurationImpl implements Configuration {
         Set<Category> usedCategories = new HashSet<>();
 
         //List all used categories
-        for(PartType part : selectedParts){
+        for(Part part : selectedParts){
             usedCategories.add(part.getCategory());
         }
 
@@ -89,7 +91,7 @@ public class ConfigurationImpl implements Configuration {
      * @return the part associated to the category
      */
     @Override
-    public Set<PartType> getSelectedParts() {
+    public Set<Part> getSelectedParts() {
         return this.selectedParts;
     }
 
@@ -103,7 +105,8 @@ public class ConfigurationImpl implements Configuration {
 
         //remove old part in same cat
         unselectPartType(chosenPart.getCategory());
-        this.selectedParts.add(chosenPart);
+        PartTypeImpl pti = (PartTypeImpl) chosenPart;
+        this.selectedParts.add(pti.newInstance());
     }
 
     /**
@@ -112,17 +115,17 @@ public class ConfigurationImpl implements Configuration {
      * @return the part selected for a specific category
      */
     @Override
-    public PartType getSelectionForCategory(Category category) {
+    public Optional<Part> getSelectionForCategory(Category category) {
 
         Objects.requireNonNull(category,"category cannot be null");
 
-        for(PartType part : this.selectedParts){ //Search for category
-            if (part.getCategory() == category){
-                return part; //get part
+        for(Part part : this.selectedParts){ //Search for category
+            if (part.getCategory().equals(category)){
+                return Optional.of(part); //get part
             }
         }
 
-        return null;
+        return Optional.empty();
     }
 
     /**

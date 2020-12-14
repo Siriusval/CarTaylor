@@ -84,11 +84,8 @@ public class PartTypeImpl implements PartType {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-
         PartTypeImpl partType = (PartTypeImpl) o;
-
-        if (!name.equals(partType.name)) return false;
-        return category.equals(partType.category);
+        return Objects.equals(name, partType.name) && Objects.equals(classRef, partType.classRef) && Objects.equals(category, partType.category);
     }
 
     /**
@@ -97,8 +94,6 @@ public class PartTypeImpl implements PartType {
      */
     @Override
     public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + category.hashCode();
-        return result;
+        return Objects.hash(name, classRef, category);
     }
 }

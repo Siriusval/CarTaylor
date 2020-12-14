@@ -7,7 +7,6 @@ import java.util.Set;
 
 public class Engine extends  PartImpl{
 
-
     public Engine(PartTypeImpl pti) {
         super(pti);
         addProperty("type", () -> type(pti.getName()), null, Set.of(type(pti.getName())));
@@ -30,5 +29,10 @@ public class Engine extends  PartImpl{
             default:
                 throw new IllegalStateException("Unexpected value: " + name);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        return super.equals(o);
     }
 }

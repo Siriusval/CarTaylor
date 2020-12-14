@@ -31,4 +31,9 @@ public class Transmission extends  PartImpl{
                 throw new IllegalStateException("Unexpected value: " + name);
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        return super.equals(o);
+    }
 }

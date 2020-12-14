@@ -55,9 +55,9 @@ public class ConfiguratorTest {
         log.info("Get Variants");
 
         Category exteriorCategory = new CategoryImpl("exterior");
-        PartType p1 = new PartTypeImpl("XC",exteriorCategory);
-        PartType p2 = new PartTypeImpl("XM",exteriorCategory);
-        PartType p3 = new PartTypeImpl("XS",exteriorCategory);
+        PartType p1 = new PartTypeImpl("XC",part.Exterior.class,exteriorCategory);
+        PartType p2 = new PartTypeImpl("XM",part.Exterior.class,exteriorCategory);
+        PartType p3 = new PartTypeImpl("XS",part.Exterior.class,exteriorCategory);
         Set<PartType> testSet = Set.of(p1,p2,p3);
 
         Set<PartType> parts = configurator.getVariants(exteriorCategory);

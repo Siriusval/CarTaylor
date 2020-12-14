@@ -33,7 +33,7 @@ public class PartTypeTest {
     @Test
     void constructorEmptyStringTest() {
         Executable exec = () -> {
-            new PartTypeImpl("",new CategoryImpl("engine"));
+            new PartTypeImpl("",part.Engine.class,new CategoryImpl("engine"));
         };
 
         assertThrows(IllegalArgumentException.class,exec);

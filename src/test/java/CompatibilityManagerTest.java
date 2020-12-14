@@ -41,21 +41,21 @@ public class CompatibilityManagerTest {
 
         //Create EG100
         Category engineCategory = new CategoryImpl("engine");
-        EG100 = new PartTypeImpl("EG100", engineCategory);
+        EG100 = new PartTypeImpl("EG100", part.Engine.class, engineCategory);
 
         //Doesnt have any incompatibilities or requirements
-        ED180 = new PartTypeImpl("ED180",engineCategory);
+        ED180 = new PartTypeImpl("ED180",part.Engine.class,engineCategory);
 
         //Create XS
         Category exteriorCategory = new CategoryImpl("exterior");
-        XS = new PartTypeImpl("XS", exteriorCategory);
+        XS = new PartTypeImpl("XS", part.Exterior.class,exteriorCategory);
 
         //Add incompatibility
         cm.addIncompatibilities(XS,Set.of(EG100));
 
         //Create IS
         Category interiorCategory = new CategoryImpl("interior");
-        IS = new PartTypeImpl("IS", interiorCategory);
+        IS = new PartTypeImpl("IS", part.Interior.class,interiorCategory);
 
         //Add requirement
         cm.addRequirements(XS,Set.of(IS));

@@ -189,19 +189,20 @@ public class ConfigurationTest {
     @Test
     public void getSelectedPartsTest(){
         List<String> partsToChoose= Arrays.asList("EH120","TC120","XC","IN"); //EH120 require TC120
-        Set<PartType> selectedParts = new HashSet<>();
+        Set<Part> selectedParts = new HashSet<>();
 
         for(Category cat : configurator.getCategories()){
             for(PartType part : configurator.getVariants(cat)){
                 if (partsToChoose.contains(part.getName())){
-                    selectedParts.add(part);
+                    PartTypeImpl pti = (PartTypeImpl) part;
+                    selectedParts.add(pti.newInstance());
                     configuration.selectPart(part);
                     break;
                 }
             }
         }
-
-        assertTrue(configuration.getSelectedParts().containsAll(selectedParts));
+        Set<Part> confParts = configuration.getSelectedParts();
+        assertTrue(confParts.containsAll(selectedParts));
     }
 
     /**
@@ -214,16 +215,16 @@ public class ConfigurationTest {
     public void getSelectionForCategoryTest(){
         List<String> partsToChoose= Arrays.asList("EH120","TC120","XC","IN"); //EH120 require TC120
         Category selectedCategory = null;
-        PartType selectedPartForEngine = null;
+        Optional<Part> selectedPartForEngine = null;
 
 
         for(Category cat : configurator.getCategories()){
-
             for(PartType part : configurator.getVariants(cat)){
                 if (partsToChoose.contains(part.getName())){
                     if(cat.getName().equals("engine")){
                         selectedCategory = cat;
-                        selectedPartForEngine = part;
+                        PartTypeImpl pti = (PartTypeImpl) part;
+                        selectedPartForEngine = Optional.of(pti.newInstance());
                     }
                     configuration.selectPart(part);
                     break;
@@ -231,7 +232,10 @@ public class ConfigurationTest {
             }
         }
 
-        assertEquals(selectedPartForEngine,configuration.getSelectionForCategory(selectedCategory));
+
+        Optional<Part> pt = configuration.getSelectionForCategory(selectedCategory);
+        log.info(String.valueOf(pt.get().equals(selectedPartForEngine.get())));
+        assertEquals(selectedPartForEngine.get(),pt.get());
     }
 
     /**
@@ -239,7 +243,7 @@ public class ConfigurationTest {
      */
     @Test
     void getNoSelectionForCategory() {
-        assertNull(configuration.getSelectionForCategory(new CategoryImpl("engine")));
+        assertEquals(configuration.getSelectionForCategory(new CategoryImpl("engine")),Optional.empty());
 
     }
 }

@@ -40,9 +40,25 @@ public class PartImpl implements Part {
             this.possibleValues = possibleValues;
 
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Property property = (Property) o;
+            //return Objects.equals(getter, property.getter) && Objects.equals(setter, property.setter) && Objects.equals(possibleValues, property.possibleValues);
+            return Objects.equals(possibleValues, property.possibleValues);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(possibleValues);
+        }
     }
 
     private Map<String, Property> properties = new HashMap<>();
+
+
 
     protected void addProperty(String name, Supplier<String> getter, Consumer<String> setter,
                                Set<String> possibleValues) {
@@ -82,5 +98,18 @@ public class PartImpl implements Part {
             return Collections.unmodifiableSet(properties.get(propertyName).possibleValues);
         }
         return Collections.emptySet();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        PartImpl part = (PartImpl) o;
+        return Objects.equals(type, part.type) && Objects.equals(properties, part.properties);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(type, properties);
     }
 }

@@ -36,7 +36,7 @@ public class ConfiguratorImpl implements Configurator {
         this.variants = new HashSet<>();
         init();
 
-        Set<PartType> selectedParts = new HashSet<>();
+        Set<Part> selectedParts = new HashSet<>();
         this.configuration = new ConfigurationImpl(this, selectedParts);
     }
 
