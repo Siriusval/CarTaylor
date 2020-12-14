@@ -15,6 +15,10 @@ public class PartImpl implements Part {
 
     private PartType type;
 
+    public PartImpl(PartType type) {
+        this.type = type;
+    }
+
     @Override
     public Category getCategory() {
         return type.getCategory();

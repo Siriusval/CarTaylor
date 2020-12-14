@@ -45,8 +45,10 @@ public class PartTypeImpl implements PartType {
     public PartImpl newInstance() {
         Constructor<? extends PartImpl> constructor;
         try {
-            constructor = classRef.getConstructor();
-            return constructor.newInstance();
+            Class[] cArg = {PartTypeImpl.class};
+            constructor = classRef.getConstructor(cArg);
+
+            return constructor.newInstance(this);
         } catch (Exception e) {
             Logger.getGlobal().log(Level.SEVERE, "constructor call failed", e);
             System.exit(-1);

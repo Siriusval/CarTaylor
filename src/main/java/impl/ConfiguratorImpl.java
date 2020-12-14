@@ -54,12 +54,12 @@ public class ConfiguratorImpl implements Configurator {
 
         //Variants
         //Engine parts
-        PartType EG100 = new PartTypeImpl("EG100",engineCategory);
-        PartType EG133 = new PartTypeImpl("EG133",engineCategory);
-        PartType EG210 = new PartTypeImpl("EG210",engineCategory);
-        PartType ED110 = new PartTypeImpl("ED110",engineCategory);
-        PartType ED180 = new PartTypeImpl("ED180",engineCategory);
-        PartType EH120 = new PartTypeImpl("EH120",engineCategory);
+        PartType EG100 = new PartTypeImpl("EG100",part.Engine.class,engineCategory);
+        PartType EG133 = new PartTypeImpl("EG133",part.Engine.class,engineCategory);
+        PartType EG210 = new PartTypeImpl("EG210",part.Engine.class,engineCategory);
+        PartType ED110 = new PartTypeImpl("ED110",part.Engine.class,engineCategory);
+        PartType ED180 = new PartTypeImpl("ED180",part.Engine.class,engineCategory);
+        PartType EH120 = new PartTypeImpl("EH120",part.Engine.class,engineCategory);
         variants.add(EG100);
         variants.add(EG133);
         variants.add(EG210);
@@ -68,12 +68,12 @@ public class ConfiguratorImpl implements Configurator {
         variants.add(EH120);
 
         //Transmission parts
-        PartType TM5 = new PartTypeImpl("TM5",transmissionCategory);
-        PartType TM6 = new PartTypeImpl("TM6",transmissionCategory);
-        PartType TA5 = new PartTypeImpl("TA5",transmissionCategory);
-        PartType TS6 = new PartTypeImpl("TS6",transmissionCategory);
-        PartType TSF7 = new PartTypeImpl("TSF7",transmissionCategory);
-        PartType TC120 = new PartTypeImpl("TC120",transmissionCategory);
+        PartType TM5 = new PartTypeImpl("TM5",part.Transmission.class, transmissionCategory);
+        PartType TM6 = new PartTypeImpl("TM6",part.Transmission.class,transmissionCategory);
+        PartType TA5 = new PartTypeImpl("TA5",part.Transmission.class,transmissionCategory);
+        PartType TS6 = new PartTypeImpl("TS6",part.Transmission.class,transmissionCategory);
+        PartType TSF7 = new PartTypeImpl("TSF7",part.Transmission.class,transmissionCategory);
+        PartType TC120 = new PartTypeImpl("TC120",part.Transmission.class,transmissionCategory);
         variants.add(TM5);
         variants.add(TM6);
         variants.add(TA5);
@@ -82,17 +82,17 @@ public class ConfiguratorImpl implements Configurator {
         variants.add(TC120);
 
         //Exterior parts
-        PartType XC = new PartTypeImpl("XC",exteriorCategory);
-        PartType XM = new PartTypeImpl("XM",exteriorCategory);
-        PartType XS = new PartTypeImpl("XS",exteriorCategory);
+        PartType XC = new PartTypeImpl("XC",part.Exterior.class,exteriorCategory);
+        PartType XM = new PartTypeImpl("XM",part.Exterior.class,exteriorCategory);
+        PartType XS = new PartTypeImpl("XS",part.Exterior.class,exteriorCategory);
         variants.add(XC);
         variants.add(XM);
         variants.add(XS);
 
         //Interior parts
-        PartType IN = new PartTypeImpl("IN",interiorCategory);
-        PartType IH = new PartTypeImpl("IH",interiorCategory);
-        PartType IS = new PartTypeImpl("IS",interiorCategory);
+        PartType IN = new PartTypeImpl("IN",part.Interior.class,interiorCategory);
+        PartType IH = new PartTypeImpl("IH",part.Interior.class,interiorCategory);
+        PartType IS = new PartTypeImpl("IS",part.Interior.class,interiorCategory);
         variants.add(IN);
         variants.add(IH);
         variants.add(IS);
