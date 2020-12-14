@@ -1,6 +1,7 @@
     package api;
 
 
+import java.util.Optional;
 import java.util.Set;
 
 /**
@@ -32,7 +33,7 @@ public interface Configuration {
      *
      * @return a set of the selected parts
      */
-    Set<PartType> getSelectedParts();
+    Set<Part> getSelectedParts();
 
     /**
      * Select a part (add it to the configuration)
@@ -46,8 +47,7 @@ public interface Configuration {
      * @param category, the category of the part we want
      * @return the part that belongs to this category
      */
-    PartType getSelectionForCategory(Category category);
-    //TODO : in v2, return Optional
+    Optional<Part> getSelectionForCategory(Category category);
 
     /**
      * Unselect a part

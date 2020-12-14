@@ -3,7 +3,10 @@ package impl;
 import api.Category;
 import api.PartType;
 
+import java.lang.reflect.Constructor;
 import java.util.Objects;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Implementation class of PartType
@@ -15,6 +18,9 @@ public class PartTypeImpl implements PartType {
 
     /** Name of the partType */
     private final String name;
+
+    private Class<? extends PartImpl> classRef;
+
     /** Category of the partType */
     private final Category category;
 
@@ -23,7 +29,7 @@ public class PartTypeImpl implements PartType {
      * @param name, the name of the partType
      * @param category, the category of the partType
      */
-    public PartTypeImpl(String name, Category category) {
+    public PartTypeImpl(String name, Class<? extends PartImpl> classRef, Category category) {
 
         Objects.requireNonNull(name,"name cannot be null");
         Objects.requireNonNull(category,"category cannot be null");
@@ -32,8 +38,22 @@ public class PartTypeImpl implements PartType {
         }
 
         this.name = name;
+        this.classRef = classRef;
         this.category = category;
     }
+
+    public PartImpl newInstance() {
+        Constructor<? extends PartImpl> constructor;
+        try {
+            constructor = classRef.getConstructor();
+            return constructor.newInstance();
+        } catch (Exception e) {
+            Logger.getGlobal().log(Level.SEVERE, "constructor call failed", e);
+            System.exit(-1);
+        }
+        return null;
+    }
+
 
     /**
      * {@inheritDoc}
