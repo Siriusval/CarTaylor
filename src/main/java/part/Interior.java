@@ -7,24 +7,25 @@ import java.util.Set;
 
 public class Interior extends  PartImpl{
 
-
     public Interior(PartTypeImpl pti) {
         super(pti);
-        addProperty("color", () -> color(pti.getName()), null, Set.of(color(pti.getName())));
+        addProperty("finish", () -> finish(pti.getName()) , null, Set.of(finish(pti.getName())));
     }
 
-    private String color(String name) {
-        switch (name) {
+    public String finish(String name){
+        switch (name){
             case "IN":
-                return "brown";
+                return "Standard interior";
             case "IH":
-                return "white";
+                return "High-end interior";
             case "IS":
-                return "black";
-            default:
-                throw new IllegalStateException("Unexpected value: " + name);
+                return "Sport finish";
+            default :
+                return null;
         }
     }
+
+
 
     @Override
     public boolean equals(Object o) {

@@ -1,5 +1,8 @@
 package api;
 
+import impl.PrettyPrinter;
+import impl.Visitor;
+
 public interface Part extends PropertyManager{
 
     default String getName() {
@@ -9,4 +12,7 @@ public interface Part extends PropertyManager{
     Category getCategory();
 
     PartType getType();
+
+
+    void accept(Visitor v);
 }

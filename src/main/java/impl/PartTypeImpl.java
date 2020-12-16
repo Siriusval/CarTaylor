@@ -75,6 +75,11 @@ public class PartTypeImpl implements PartType {
         return this.category;
     }
 
+    @Override
+    public void accept(Visitor v) {
+        v.visitPartType(this);
+    }
+
     /**
      * Check if both PartTypes are equal
      * @param o, the other object to check

@@ -112,4 +112,8 @@ public class PartImpl implements Part {
     public int hashCode() {
         return Objects.hash(type, properties);
     }
+
+    public void accept(Visitor v){
+        v.visitPart(this);
+    }
 }

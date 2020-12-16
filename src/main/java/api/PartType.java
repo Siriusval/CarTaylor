@@ -1,5 +1,8 @@
 package api;
 
+import impl.PrettyPrinter;
+import impl.Visitor;
+
 /**
  * Interface of PartType<br>
  * Contains the methods to implement in PartType<br>
@@ -18,4 +21,6 @@ public interface PartType {
      * @return the category to which the part belongs
      */
     Category getCategory();
+
+    void accept(Visitor v);
 }

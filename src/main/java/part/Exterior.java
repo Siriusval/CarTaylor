@@ -7,24 +7,25 @@ import java.util.Set;
 
 public class Exterior extends  PartImpl{
 
-
     public Exterior(PartTypeImpl pti) {
         super(pti);
-        addProperty("color", () -> color(pti.getName()), null, Set.of(color(pti.getName())));
+        addProperty("paint", () -> paint(pti.getName()) , null, Set.of(paint(pti.getName())));
     }
 
-    private String color(String name) {
-        switch (name) {
+    public String paint(String name){
+        switch (name){
             case "XC":
-                return "blue";
+                return "Classic paint";
             case "XM":
-                return "red";
+                return "Metallic paint";
             case "XS":
-                return "green";
-            default:
-                throw new IllegalStateException("Unexpected value: " + name);
+                return "Red paint and sport decoration";
+            default :
+                return null;
         }
     }
+
+
 
     @Override
     public boolean equals(Object o) {

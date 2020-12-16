@@ -149,6 +149,11 @@ public class ConfigurationImpl implements Configuration {
         this.selectedParts.clear();
     }
 
+    @Override
+    public void accept(Visitor visitor) {
+        visitor.visitConfiguration(this);
+    }
+
     /*
         @Override
         public void printDescription(PrintStream stream) {

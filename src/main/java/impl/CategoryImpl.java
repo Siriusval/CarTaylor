@@ -39,6 +39,11 @@ public class CategoryImpl implements Category {
         return this.name;
     }
 
+    @Override
+    public void accept(Visitor v) {
+        v.visitCategory(this);
+    }
+
 
     /**
      * Check if both Categories are equal
