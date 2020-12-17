@@ -9,6 +9,8 @@ import java.util.Set;
 
 public abstract class Exterior extends  PartImpl{
 
+    public static final String PAINT_PROPERTY = "paint";
+
     private enum PaintColor {
         CLASSIC,
         METALLIC,
@@ -27,7 +29,7 @@ public abstract class Exterior extends  PartImpl{
     }
 
     protected void setPaintColor(String value) {
-        assert getAvailablePropertyValues("paint").contains(value);
+        assert getAvailablePropertyValues(PAINT_PROPERTY).contains(value);
         this.paintColor = PaintColor.valueOf(value);
     }
 
@@ -36,7 +38,7 @@ public abstract class Exterior extends  PartImpl{
             super(pti);
             this.paintColor = PaintColor.CLASSIC;
             this.possiblePaintColor = Set.of(PaintColor.CLASSIC.name());
-            addProperty("paint", this::getPaintColor, this::setPaintColor, possiblePaintColor);
+            addProperty(PAINT_PROPERTY, this::getPaintColor, this::setPaintColor, possiblePaintColor);
         }
     }
 
@@ -45,7 +47,7 @@ public abstract class Exterior extends  PartImpl{
             super(pti);
             this.paintColor = PaintColor.METALLIC;
             this.possiblePaintColor = Set.of(PaintColor.METALLIC.name());
-            addProperty("paint", this::getPaintColor, this::setPaintColor, possiblePaintColor);
+            addProperty(PAINT_PROPERTY, this::getPaintColor, this::setPaintColor, possiblePaintColor);
         }
     }
 
@@ -54,7 +56,7 @@ public abstract class Exterior extends  PartImpl{
             super(pti);
             this.paintColor = PaintColor.RED;
             this.possiblePaintColor = Set.of(PaintColor.RED.name());
-            addProperty("paint", this::getPaintColor, this::setPaintColor, possiblePaintColor);
+            addProperty(PAINT_PROPERTY, this::getPaintColor, this::setPaintColor, possiblePaintColor);
         }
     }
 

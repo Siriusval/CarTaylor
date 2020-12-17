@@ -49,7 +49,7 @@ public class ConfigurationImpl implements Configuration {
 
             //get all partType from part
             Set<PartType> selectedPartTypes = new HashSet<>();
-            getSelectedParts().forEach( (p) -> selectedPartTypes.add(p.getType()));
+            getSelectedParts().forEach( p -> selectedPartTypes.add(p.getType()));
 
             if (!selectedPartTypes.containsAll(requirements)){ //check if requirements are missing in the config
                 return false;
@@ -154,45 +154,4 @@ public class ConfigurationImpl implements Configuration {
         visitor.visitConfiguration(this);
     }
 
-    /*
-        @Override
-        public void printDescription(PrintStream stream) {
-            stream.println("isValid : "+this.isValid());
-            stream.println("isComplete : "+this.isComplete());
-            for (Part part : selectedParts){
-                stream.println(part.printDescription());
-            }
-        }
-        */
-
-    /*
-     * Check if both Configurations are equal
-     * @param o, the other object to check
-     * @return True if equal, else False
-     */
-    /*
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        ConfigurationImpl that = (ConfigurationImpl) o;
-
-        if (!selectedParts.equals(that.selectedParts)) return false;
-        return configuratorRef.equals(that.configuratorRef);
     }
-    */
-
-    /*
-     * Generate hashcode to compare two objects of this class
-     * @return the object hashcode
-     */
-    /*
-    @Override
-    public int hashCode() {
-        int result = selectedParts.hashCode();
-        result = 31 * result + configuratorRef.hashCode();
-        return result;
-    }
-    */
-}

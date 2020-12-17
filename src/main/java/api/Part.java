@@ -1,6 +1,5 @@
 package api;
 
-import impl.PrettyPrinter;
 import impl.Visitor;
 
 public interface Part extends PropertyManager{

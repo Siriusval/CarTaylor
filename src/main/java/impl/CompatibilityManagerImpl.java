@@ -20,6 +20,9 @@ import java.util.Set;
  */
 public class CompatibilityManagerImpl implements CompatibilityManager  {
 
+    public static final String REFERENCE_CANNOT_BE_NULL = "reference cannot be null";
+    public static final String TARGET_CANNOT_BE_NULL = "target cannot be null";
+    public static final String TARGET_CANNOT_BE_EMPTY = "target cannot be empty";
     /** Graph that represents the requirements between parts */
     protected final Graph<PartType, DefaultEdge> requirements;
     /** Graph that represents the incompatibilities between parts */
@@ -46,10 +49,10 @@ public class CompatibilityManagerImpl implements CompatibilityManager  {
         // /!\ Symmetric relation
 
         //Check if null or empty
-        Objects.requireNonNull(reference, "reference cannot be null");
-        Objects.requireNonNull(target,"target cannot be null");
+        Objects.requireNonNull(reference, REFERENCE_CANNOT_BE_NULL);
+        Objects.requireNonNull(target, TARGET_CANNOT_BE_NULL);
         if(target.isEmpty()){
-            throw new IllegalArgumentException("target cannot be empty");
+            throw new IllegalArgumentException(TARGET_CANNOT_BE_EMPTY);
         }
 
         this.incompatibilities.addVertex(reference); //Add a new vertex with this part (if it already exists, do nothing)
@@ -69,8 +72,8 @@ public class CompatibilityManagerImpl implements CompatibilityManager  {
     @Override
     public void removeIncompatibility(PartType reference, PartType target) {
 
-        Objects.requireNonNull(reference,"reference cannot be null");
-        Objects.requireNonNull(target,"target cannot be null");
+        Objects.requireNonNull(reference, REFERENCE_CANNOT_BE_NULL);
+        Objects.requireNonNull(target, TARGET_CANNOT_BE_NULL);
 
         this.incompatibilities.removeEdge(reference,target);
     }
@@ -86,10 +89,10 @@ public class CompatibilityManagerImpl implements CompatibilityManager  {
 
         // /!\ Not Symmetric relation
 
-        Objects.requireNonNull(reference,"reference cannot be null");
-        Objects.requireNonNull(target,"target cannot be null");
+        Objects.requireNonNull(reference, REFERENCE_CANNOT_BE_NULL);
+        Objects.requireNonNull(target, TARGET_CANNOT_BE_NULL);
         if(target.isEmpty()){
-            throw new IllegalArgumentException("target cannot be empty");
+            throw new IllegalArgumentException(TARGET_CANNOT_BE_EMPTY);
         }
 
         this.requirements.addVertex(reference); //Add a new vertex with this part (if it already exists, do nothing)
@@ -108,8 +111,8 @@ public class CompatibilityManagerImpl implements CompatibilityManager  {
      */
     @Override
     public void removeRequirement(PartType reference, PartType target) {
-        Objects.requireNonNull(reference,"reference cannot be null");
-        Objects.requireNonNull(target,"target cannot be null");
+        Objects.requireNonNull(reference, REFERENCE_CANNOT_BE_NULL);
+        Objects.requireNonNull(target, TARGET_CANNOT_BE_NULL);
 
         this.requirements.removeEdge(reference,target);
     }
@@ -123,7 +126,7 @@ public class CompatibilityManagerImpl implements CompatibilityManager  {
      */
     @Override
     public Set<PartType> getIncompatibilities(PartType reference) {
-        Objects.requireNonNull(reference,"reference cannot be null");
+        Objects.requireNonNull(reference, REFERENCE_CANNOT_BE_NULL);
 
         if(this.incompatibilities.containsVertex(reference)){
             return Set.copyOf(Graphs.successorListOf(this.incompatibilities,reference)); //copyOf return an unmodifiable set
@@ -138,7 +141,7 @@ public class CompatibilityManagerImpl implements CompatibilityManager  {
      */
     @Override
     public Set<PartType> getRequirements(PartType reference) {
-        Objects.requireNonNull(reference,"reference cannot be null");
+        Objects.requireNonNull(reference, REFERENCE_CANNOT_BE_NULL);
         if(this.requirements.containsVertex(reference)){
             return  Set.copyOf(Graphs.successorListOf(this.requirements,reference)); //copyOf return an unmodifiable set
         }

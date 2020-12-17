@@ -15,7 +15,7 @@ import java.util.logging.Logger;
  * @see CompatibilityManagerImpl
  * @author  Valentin Hulot
  */
-public class CompatibilityManagerTest {
+class CompatibilityManagerTest {
 
     public static Logger log ;
     public static CompatibilityManager cm;
@@ -68,7 +68,7 @@ public class CompatibilityManagerTest {
      */
     @DisplayName("Add/Get Incompatibility Test")
     @Test
-    public void addIncompatibility(){
+    void addIncompatibility(){
         log.info("Add/Get Incompatibility Test");
 
         //Check if contained
@@ -82,7 +82,7 @@ public class CompatibilityManagerTest {
      */
     @DisplayName("Add/Get Requirement Test")
     @Test
-    public void addRequirement(){
+    void addRequirement(){
         log.info("Add/Get Requirement Test");
 
         //Check if contained
@@ -96,7 +96,7 @@ public class CompatibilityManagerTest {
      */
     @DisplayName("Get No Incompatibility Test")
     @Test
-    public void getNoIncompatibilitiesTest(){
+    void getNoIncompatibilitiesTest(){
         log.info("Get No Incompatibility Test");
 
         //Check if contained
@@ -110,7 +110,7 @@ public class CompatibilityManagerTest {
      */
     @DisplayName("Get No Requirement Test")
     @Test
-    public void getNoRequirementsTest(){
+    void getNoRequirementsTest(){
         log.info("Get No Requirement Test");
 
         //Check if contained
@@ -123,7 +123,7 @@ public class CompatibilityManagerTest {
      */
     @DisplayName("Add Incompatibility Empty Set")
     @Test
-    public void addIncompatibilityEmptySet(){
+    void addIncompatibilityEmptySet(){
         log.info("Add Incompatibility Test");
 
         Executable exec = () -> {
@@ -141,7 +141,7 @@ public class CompatibilityManagerTest {
      */
     @DisplayName("Add Requirement Empty Set")
     @Test
-    public void addRequirementEmptySet(){
+    void addRequirementEmptySet(){
         log.info("Add Requirement Test");
 
         Executable exec = () -> {
@@ -158,7 +158,7 @@ public class CompatibilityManagerTest {
      */
     @DisplayName("Remove Incompatibility Test")
     @Test
-    public void removeIncompatibilityTest(){
+    void removeIncompatibilityTest(){
         log.info("Remove Incompatibility Test");
 
         //Choose the one to remove
@@ -175,7 +175,7 @@ public class CompatibilityManagerTest {
      */
     @DisplayName("Remove Requirement Test")
     @Test
-    public void removeRequirementTest(){
+    void removeRequirementTest(){
         log.info("Remove Requirement Test");
 
 

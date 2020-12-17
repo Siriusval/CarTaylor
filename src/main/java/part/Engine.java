@@ -8,6 +8,8 @@ import java.util.Set;
 
 public abstract class Engine extends PartImpl{
 
+    public static final String POWER_PROPERTY = "power";
+
     private enum EngineType {
         GASOLINE,
         DIESEL,
@@ -37,7 +39,7 @@ public abstract class Engine extends PartImpl{
     }
 
     protected void setPower(String value) {
-        assert getAvailablePropertyValues("power").contains(value);
+        assert getAvailablePropertyValues(POWER_PROPERTY).contains(value);
         this.power = value;
     }
 
@@ -50,7 +52,7 @@ public abstract class Engine extends PartImpl{
             this.possibleEngineType = Set.of(EngineType.GASOLINE.name());
             this.possiblePower = Set.of("100kW");
             addProperty("type", this::getEngineType, this::setEngineType, possibleEngineType);
-            addProperty("power", this::getPower, this::setPower, possiblePower);
+            addProperty(POWER_PROPERTY, this::getPower, this::setPower, possiblePower);
         }
     }
 
@@ -62,7 +64,7 @@ public abstract class Engine extends PartImpl{
             this.possibleEngineType = Set.of(EngineType.GASOLINE.name());
             this.possiblePower = Set.of("133kW");
             addProperty("type", this::getEngineType , this::setEngineType, possibleEngineType);
-            addProperty("power", this::getPower, this::setPower, possiblePower);
+            addProperty(POWER_PROPERTY, this::getPower, this::setPower, possiblePower);
         }
     }
 
@@ -74,7 +76,7 @@ public abstract class Engine extends PartImpl{
             this.possibleEngineType = Set.of(EngineType.GASOLINE.name());
             this.possiblePower = Set.of("210kW");
             addProperty("type", this::getEngineType, this::setEngineType, possibleEngineType);
-            addProperty("power", this::getPower, this::setPower, possiblePower);
+            addProperty(POWER_PROPERTY, this::getPower, this::setPower, possiblePower);
         }
     }
 
@@ -86,7 +88,7 @@ public abstract class Engine extends PartImpl{
             this.possibleEngineType = Set.of(EngineType.DIESEL.name());
             this.possiblePower = Set.of("110kW");
             addProperty("type", this::getEngineType , this::setEngineType, possibleEngineType);
-            addProperty("power", this::getPower, this::setPower, possiblePower);
+            addProperty(POWER_PROPERTY, this::getPower, this::setPower, possiblePower);
         }
     }
 
@@ -98,7 +100,7 @@ public abstract class Engine extends PartImpl{
             this.possibleEngineType = Set.of(EngineType.DIESEL.name());
             this.possiblePower = Set.of("180kW");
             addProperty("type", this::getEngineType , this::setEngineType, possibleEngineType);
-            addProperty("power", this::getPower, this::setPower, possiblePower);
+            addProperty(POWER_PROPERTY, this::getPower, this::setPower, possiblePower);
         }
     }
 
@@ -110,7 +112,7 @@ public abstract class Engine extends PartImpl{
             this.possibleEngineType = Set.of(EngineType.GASOLINE_ELECTRIC_HYBRID.name());
             this.possiblePower = Set.of("120kW");
             addProperty("type", this::getEngineType , this::setEngineType, possibleEngineType);
-            addProperty("power", this::getPower, this::setPower, possiblePower);
+            addProperty(POWER_PROPERTY, this::getPower, this::setPower, possiblePower);
         }
     }
 

@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.*;
  * @see CategoryImpl
  * @author  Valentin Hulot
  */
-public class CategoryTest {
+class CategoryTest {
 
     /**
      * Logger to print in console

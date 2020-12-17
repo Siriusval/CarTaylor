@@ -6,6 +6,7 @@ import api.Part;
 import api.PartType;
 
 import java.io.PrintStream;
+import java.util.Optional;
 
 public class PrettyPrinter implements Visitor {
 
@@ -42,7 +43,9 @@ public class PrettyPrinter implements Visitor {
 
         output.println("Part :"+p.getName());
         for(String property : p.getPropertyNames()){
-            output.println("Property :"+property+", Value :"+p.getProperty(property).get());
+            output.print("Property :"+property+", Value :");
+            Optional<String> pro = p.getProperty(property);
+            output.println(pro.isPresent() ? pro.get() : "Empty");
         }
     }
 }

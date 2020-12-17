@@ -16,7 +16,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  * @see PartTypeImpl
  * @author  Valentin Hulot
  */
-public class PartTypeTest {
+class PartTypeTest {
 
     public static Logger log ;
 

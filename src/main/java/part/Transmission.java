@@ -8,6 +8,8 @@ import java.util.Set;
 
 public abstract class Transmission extends  PartImpl{
 
+    public static final String SPEED_PROPERTY = "speed";
+
     private enum TransmissionType {
         MANUAL,
         AUTOMATIC,
@@ -45,7 +47,7 @@ public abstract class Transmission extends  PartImpl{
     }
 
     protected void setSpeed(String value) {
-        assert getAvailablePropertyValues("speed").contains(value);
+        assert getAvailablePropertyValues(SPEED_PROPERTY).contains(value);
         this.speed = Speed.valueOf(value);
     }
 
@@ -57,7 +59,7 @@ public abstract class Transmission extends  PartImpl{
             this.possibleTransmissionType = Set.of(TransmissionType.MANUAL.name());
             this.possibleSpeed = Set.of(Speed.GEAR_5.name());
             addProperty("type", this::getTransmissionType, this::setTransmissionType, possibleTransmissionType);
-            addProperty("speed", this::getSpeed, this::setSpeed, possibleSpeed);
+            addProperty(SPEED_PROPERTY, this::getSpeed, this::setSpeed, possibleSpeed);
         }
     }
 
@@ -69,7 +71,7 @@ public abstract class Transmission extends  PartImpl{
             this.possibleTransmissionType = Set.of(TransmissionType.MANUAL.name());
             this.possibleSpeed = Set.of(Speed.GEAR_6.name());
             addProperty("type", this::getTransmissionType, this::setTransmissionType, possibleTransmissionType);
-            addProperty("speed", this::getSpeed, this::setSpeed, possibleSpeed);
+            addProperty(SPEED_PROPERTY, this::getSpeed, this::setSpeed, possibleSpeed);
         }
     }
 
@@ -81,7 +83,7 @@ public abstract class Transmission extends  PartImpl{
             this.possibleTransmissionType = Set.of(TransmissionType.AUTOMATIC.name());
             this.possibleSpeed = Set.of(Speed.GEAR_5.name());
             addProperty("type", this::getTransmissionType, this::setTransmissionType, possibleTransmissionType);
-            addProperty("speed", this::getSpeed, this::setSpeed, possibleSpeed);
+            addProperty(SPEED_PROPERTY, this::getSpeed, this::setSpeed, possibleSpeed);
         }
     }
 
@@ -93,7 +95,7 @@ public abstract class Transmission extends  PartImpl{
             this.possibleTransmissionType = Set.of(TransmissionType.SEQUENTIAL.name());
             this.possibleSpeed = Set.of(Speed.GEAR_6.name());
             addProperty("type", this::getTransmissionType, this::setTransmissionType, possibleTransmissionType);
-            addProperty("speed", this::getSpeed, this::setSpeed, possibleSpeed);
+            addProperty(SPEED_PROPERTY, this::getSpeed, this::setSpeed, possibleSpeed);
         }
     }
 
@@ -105,7 +107,7 @@ public abstract class Transmission extends  PartImpl{
             this.possibleTransmissionType = Set.of(TransmissionType.SEQUENTIAL.name());
             this.possibleSpeed = Set.of(Speed.GEAR_7_WHEELS_4.name());
             addProperty("type", this::getTransmissionType, this::setTransmissionType, possibleTransmissionType);
-            addProperty("speed", this::getSpeed, this::setSpeed, possibleSpeed);
+            addProperty(SPEED_PROPERTY, this::getSpeed, this::setSpeed, possibleSpeed);
         }
     }
 
@@ -117,7 +119,7 @@ public abstract class Transmission extends  PartImpl{
             this.possibleTransmissionType = Set.of(TransmissionType.CONVERTER.name());
             this.possibleSpeed = Set.of(Speed.KWMAX_120.name());
             addProperty("type", this::getTransmissionType, this::setTransmissionType, possibleTransmissionType);
-            addProperty("speed", this::getSpeed, this::setSpeed, possibleSpeed);
+            addProperty(SPEED_PROPERTY, this::getSpeed, this::setSpeed, possibleSpeed);
         }
     }
 

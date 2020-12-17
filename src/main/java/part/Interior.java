@@ -9,6 +9,8 @@ import java.util.Set;
 
 public abstract class Interior extends  PartImpl{
 
+    public static final String STYLE_PROPERTY = "style";
+
     private enum InteriorStyle {
         STANDARD,
         HIGH_END,
@@ -28,7 +30,7 @@ public abstract class Interior extends  PartImpl{
     }
 
     protected void setInteriorStyle(String value) {
-        assert getAvailablePropertyValues("style").contains(value);
+        assert getAvailablePropertyValues(STYLE_PROPERTY).contains(value);
         this.interiorStyle = InteriorStyle.valueOf(value);
     }
 
@@ -37,7 +39,7 @@ public abstract class Interior extends  PartImpl{
             super(pti);
             this.interiorStyle = InteriorStyle.STANDARD;
             this.possibleInteriorStyle = Set.of(InteriorStyle.STANDARD.name());
-            addProperty("style", this::getInteriorStyle, this::setInteriorStyle, possibleInteriorStyle);
+            addProperty(STYLE_PROPERTY, this::getInteriorStyle, this::setInteriorStyle, possibleInteriorStyle);
         }
     }
 
@@ -46,7 +48,7 @@ public abstract class Interior extends  PartImpl{
             super(pti);
             this.interiorStyle = InteriorStyle.HIGH_END;
             this.possibleInteriorStyle = Set.of(InteriorStyle.HIGH_END.name());
-            addProperty("style", this::getInteriorStyle, this::setInteriorStyle, possibleInteriorStyle);
+            addProperty(STYLE_PROPERTY, this::getInteriorStyle, this::setInteriorStyle, possibleInteriorStyle);
         }
     }
 
@@ -55,7 +57,7 @@ public abstract class Interior extends  PartImpl{
             super(pti);
             this.interiorStyle = InteriorStyle.SPORT;
             this.possibleInteriorStyle = Set.of(InteriorStyle.SPORT.name());
-            addProperty("style", this::getInteriorStyle, this::setInteriorStyle, possibleInteriorStyle);
+            addProperty(STYLE_PROPERTY, this::getInteriorStyle, this::setInteriorStyle, possibleInteriorStyle);
         }
     }
 

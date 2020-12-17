@@ -21,7 +21,7 @@ public class CategoryImpl implements Category {
      * @throws IllegalArgumentException if String is empty
      * @param name, the name of the category
      */
-    public CategoryImpl(String name) throws IllegalArgumentException {
+    public CategoryImpl(String name) {
         Objects.requireNonNull(name);
         if(name.isBlank()){
             throw new IllegalArgumentException("String cannot be empty");

@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  * @see Configurator
  * @author Valentin Hulot
  */
-public class ConfiguratorTest {
+class ConfiguratorTest {
 
     private static Logger log ;
     private static Configurator configurator;
@@ -35,7 +35,7 @@ public class ConfiguratorTest {
      */
     @DisplayName("Get Categories")
     @Test
-    public void getCategoriesTest(){
+    void getCategoriesTest(){
         log.info("Get Categories");
         Category engineCategory = new CategoryImpl("engine");
         Category transmissionCategory = new CategoryImpl("transmission");
@@ -51,7 +51,7 @@ public class ConfiguratorTest {
      */
     @DisplayName("Get Variants")
     @Test
-    public void getVariantsTest(){
+    void getVariantsTest(){
         log.info("Get Variants");
 
         Category exteriorCategory = new CategoryImpl("exterior");
@@ -72,7 +72,7 @@ public class ConfiguratorTest {
      */
     @DisplayName("Get Configuration")
     @Test
-    public void getConfigurationTest(){
+    void getConfigurationTest(){
         log.info("Get Configuration");
 
         Configuration conf = configurator.getConfiguration();
@@ -86,7 +86,7 @@ public class ConfiguratorTest {
      */
     @DisplayName("Get Compatibility Checker")
     @Test
-    public void getCompatibilityCheckerTest(){
+    void getCompatibilityCheckerTest(){
         log.info("Get Compatibility Checker");
 
         CompatibilityChecker cc = configurator.getCompatibilityChecker();

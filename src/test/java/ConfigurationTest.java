@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  * @see Configuration
  * @author Valentin Hulot
  */
-public class ConfigurationTest {
+class ConfigurationTest {
     /** Logger to print in console */
     private static Logger log ;
     /** Configurator ref to be used in the tests */
@@ -51,7 +51,7 @@ public class ConfigurationTest {
      */
     @DisplayName("is Complete fail")
     @Test
-    public void isCompleteFailTest() {
+    void isCompleteFailTest() {
 
         Category lastCategory = null;
 
@@ -78,7 +78,7 @@ public class ConfigurationTest {
      */
     @DisplayName("is Complete Success")
     @Test
-    public void isCompleteSuccessTest() {
+    void isCompleteSuccessTest() {
 
         //Add the first part of each cat
         for(Category cat : configurator.getCategories()){
@@ -99,7 +99,7 @@ public class ConfigurationTest {
      */
     @DisplayName("is Valid")
     @Test
-    public void isValidTest() {
+    void isValidTest() {
         List<String> partsToChoose= Arrays.asList("EG100","TM5","XC");
 
         for(Category cat : configurator.getCategories()){
@@ -121,7 +121,7 @@ public class ConfigurationTest {
      */
     @DisplayName("is Valid Incompatibility")
     @Test
-    public void isValidIncompatibilityTest() {
+    void isValidIncompatibilityTest() {
         List<String> partsToChoose= Arrays.asList("EG100","TA5","XC","IN"); //EG100 and TA5 incompatibles
 
         for(Category cat : configurator.getCategories()){
@@ -142,7 +142,7 @@ public class ConfigurationTest {
      */
     @DisplayName("is Valid Requirement OK")
     @Test
-    public void isValidRequirementOKTest() {
+    void isValidRequirementOKTest() {
         List<String> partsToChoose= Arrays.asList("EH120","TC120","XC","IN"); //EH120 require TC120
 
         for(Category cat : configurator.getCategories()){
@@ -165,7 +165,7 @@ public class ConfigurationTest {
      */
     @DisplayName("is Valid Requirement Missing")
     @Test
-    public void isValidRequirementMissingTest() {
+    void isValidRequirementMissingTest() {
         List<String> partsToChoose= Arrays.asList("EH120","TM5","XC","IN"); //EH120 require TC120
 
         for(Category cat : configurator.getCategories()){
@@ -187,7 +187,7 @@ public class ConfigurationTest {
      */
     @DisplayName("Get Selected Parts")
     @Test
-    public void getSelectedPartsTest(){
+    void getSelectedPartsTest(){
         List<String> partsToChoose= Arrays.asList("EH120","TC120","XC","IN"); //EH120 require TC120
         Set<Part> selectedParts = new HashSet<>();
 
@@ -212,7 +212,7 @@ public class ConfigurationTest {
      */
     @DisplayName("Get Selection for Category")
     @Test
-    public void getSelectionForCategoryTest(){
+    void getSelectionForCategoryTest(){
         List<String> partsToChoose= Arrays.asList("EH120","TC120","XC","IN"); //EH120 require TC120
         Category selectedCategory = null;
         Optional<Part> selectedPartForEngine = null;
