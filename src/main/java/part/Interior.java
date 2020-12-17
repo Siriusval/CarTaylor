@@ -16,7 +16,7 @@ public abstract class Interior extends  PartImpl{
     public static final String STYLE_PROPERTY = "style";
 
     /**Enum for all the different interior styles */
-    private enum InteriorStyle {
+    public enum InteriorStyle {
         STANDARD,
         HIGH_END,
         SPORT
@@ -57,7 +57,7 @@ public abstract class Interior extends  PartImpl{
      */
     public static class IN extends Interior{
         /**
-         * Constuctor for the instance
+         * Constructor for the instance
          * @param pti, the partType linked to this instance
          */
         public IN(PartTypeImpl pti) {
@@ -73,7 +73,7 @@ public abstract class Interior extends  PartImpl{
      */
     public static class IH extends Interior{
         /**
-         * Constuctor for the instance
+         * Constructor for the instance
          * @param pti, the partType linked to this instance
          */
         public IH(PartTypeImpl pti) {
@@ -89,7 +89,7 @@ public abstract class Interior extends  PartImpl{
      */
     public static class IS extends Interior{
         /**
-         * Constuctor for the instance
+         * Constructor for the instance
          * @param pti, the partType linked to this instance
          */
         public IS(PartTypeImpl pti) {

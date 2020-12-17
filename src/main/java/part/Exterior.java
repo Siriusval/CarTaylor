@@ -16,7 +16,7 @@ public abstract class Exterior extends  PartImpl{
     public static final String PAINT_PROPERTY = "paint";
 
     /**Enum for all the different paint colors */
-    private enum PaintColor {
+    public enum PaintColor {
         CLASSIC,
         METALLIC,
         RED
@@ -57,7 +57,7 @@ public abstract class Exterior extends  PartImpl{
      */
     public static class XC extends Exterior{
         /**
-         * Constuctor for the instance
+         * Constructor for the instance
          * @param pti, the partType linked to this instance
          */
         public XC(PartTypeImpl pti) {
@@ -73,7 +73,7 @@ public abstract class Exterior extends  PartImpl{
      */
     public static class XM extends Exterior{
         /**
-         * Constuctor for the instance
+         * Constructor for the instance
          * @param pti, the partType linked to this instance
          */
         public XM(PartTypeImpl pti) {
@@ -89,7 +89,7 @@ public abstract class Exterior extends  PartImpl{
      */
     public static class XS extends Exterior{
         /**
-         * Constuctor for the instance
+         * Constructor for the instance
          * @param pti, the partType linked to this instance
          */
         public XS(PartTypeImpl pti) {

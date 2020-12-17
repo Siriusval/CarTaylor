@@ -13,9 +13,11 @@ public abstract class Transmission extends  PartImpl{
 
     /** Constant for property name */
     public static final String SPEED_PROPERTY = "speed";
+    public static final String TYPE_PROPERTY = "type";
+
     /**
      * Enum for all the different transmission types */
-    private enum TransmissionType {
+    public enum TransmissionType {
         MANUAL,
         AUTOMATIC,
         SEQUENTIAL,
@@ -23,7 +25,7 @@ public abstract class Transmission extends  PartImpl{
     }
 
     /**Enum for all the different speed types */
-    private enum Speed{
+    public enum Speed{
         GEAR_5,
         GEAR_6,
         GEAR_7_WHEELS_4,
@@ -60,7 +62,7 @@ public abstract class Transmission extends  PartImpl{
      * @param value, the new transmission type
      */
     protected void setTransmissionType(String value) {
-        assert getAvailablePropertyValues("type").contains(value);
+        assert getAvailablePropertyValues(TYPE_PROPERTY).contains(value);
         this.transmissionType = TransmissionType.valueOf(value);
     }
 
@@ -86,7 +88,7 @@ public abstract class Transmission extends  PartImpl{
      */
     public static class TM5 extends Transmission{
         /**
-         * Constuctor for the instance
+         * Constructor for the instance
          * @param pti, the partType linked to this instance
          */
         public TM5(PartTypeImpl pti) {
@@ -95,7 +97,7 @@ public abstract class Transmission extends  PartImpl{
             this.speed = Speed.GEAR_5;
             this.possibleTransmissionType = Set.of(TransmissionType.MANUAL.name());
             this.possibleSpeed = Set.of(Speed.GEAR_5.name());
-            addProperty("type", this::getTransmissionType, this::setTransmissionType, possibleTransmissionType);
+            addProperty(TYPE_PROPERTY, this::getTransmissionType, this::setTransmissionType, possibleTransmissionType);
             addProperty(SPEED_PROPERTY, this::getSpeed, this::setSpeed, possibleSpeed);
         }
     }
@@ -105,7 +107,7 @@ public abstract class Transmission extends  PartImpl{
      */
     public static class TM6 extends Transmission{
         /**
-         * Constuctor for the instance
+         * Constructor for the instance
          * @param pti, the partType linked to this instance
          */
         public TM6(PartTypeImpl pti) {
@@ -114,7 +116,7 @@ public abstract class Transmission extends  PartImpl{
             this.speed = Speed.GEAR_6;
             this.possibleTransmissionType = Set.of(TransmissionType.MANUAL.name());
             this.possibleSpeed = Set.of(Speed.GEAR_6.name());
-            addProperty("type", this::getTransmissionType, this::setTransmissionType, possibleTransmissionType);
+            addProperty(TYPE_PROPERTY, this::getTransmissionType, this::setTransmissionType, possibleTransmissionType);
             addProperty(SPEED_PROPERTY, this::getSpeed, this::setSpeed, possibleSpeed);
         }
     }
@@ -124,7 +126,7 @@ public abstract class Transmission extends  PartImpl{
      */
     public static class TA5 extends Transmission{
         /**
-         * Constuctor for the instance
+         * Constructor for the instance
          * @param pti, the partType linked to this instance
          */
         public TA5(PartTypeImpl pti) {
@@ -133,7 +135,7 @@ public abstract class Transmission extends  PartImpl{
             this.speed = Speed.GEAR_5;
             this.possibleTransmissionType = Set.of(TransmissionType.AUTOMATIC.name());
             this.possibleSpeed = Set.of(Speed.GEAR_5.name());
-            addProperty("type", this::getTransmissionType, this::setTransmissionType, possibleTransmissionType);
+            addProperty(TYPE_PROPERTY, this::getTransmissionType, this::setTransmissionType, possibleTransmissionType);
             addProperty(SPEED_PROPERTY, this::getSpeed, this::setSpeed, possibleSpeed);
         }
     }
@@ -143,7 +145,7 @@ public abstract class Transmission extends  PartImpl{
      */
     public static class TS6 extends Transmission{
         /**
-         * Constuctor for the instance
+         * Constructor for the instance
          * @param pti, the partType linked to this instance
          */
         public TS6(PartTypeImpl pti) {
@@ -152,7 +154,7 @@ public abstract class Transmission extends  PartImpl{
             this.speed = Speed.GEAR_6;
             this.possibleTransmissionType = Set.of(TransmissionType.SEQUENTIAL.name());
             this.possibleSpeed = Set.of(Speed.GEAR_6.name());
-            addProperty("type", this::getTransmissionType, this::setTransmissionType, possibleTransmissionType);
+            addProperty(TYPE_PROPERTY, this::getTransmissionType, this::setTransmissionType, possibleTransmissionType);
             addProperty(SPEED_PROPERTY, this::getSpeed, this::setSpeed, possibleSpeed);
         }
     }
@@ -162,7 +164,7 @@ public abstract class Transmission extends  PartImpl{
      */
     public static class TSF7 extends Transmission{
         /**
-         * Constuctor for the instance
+         * Constructor for the instance
          * @param pti, the partType linked to this instance
          */
         public TSF7(PartTypeImpl pti) {
@@ -171,7 +173,7 @@ public abstract class Transmission extends  PartImpl{
             this.speed = Speed.GEAR_7_WHEELS_4;
             this.possibleTransmissionType = Set.of(TransmissionType.SEQUENTIAL.name());
             this.possibleSpeed = Set.of(Speed.GEAR_7_WHEELS_4.name());
-            addProperty("type", this::getTransmissionType, this::setTransmissionType, possibleTransmissionType);
+            addProperty(TYPE_PROPERTY, this::getTransmissionType, this::setTransmissionType, possibleTransmissionType);
             addProperty(SPEED_PROPERTY, this::getSpeed, this::setSpeed, possibleSpeed);
         }
     }
@@ -181,7 +183,7 @@ public abstract class Transmission extends  PartImpl{
      */
     public static class TC120 extends Transmission{
         /**
-         * Constuctor for the instance
+         * Constructor for the instance
          * @param pti, the partType linked to this instance
          */
         public TC120(PartTypeImpl pti) {
@@ -190,7 +192,7 @@ public abstract class Transmission extends  PartImpl{
             this.speed = Speed.KWMAX_120;
             this.possibleTransmissionType = Set.of(TransmissionType.CONVERTER.name());
             this.possibleSpeed = Set.of(Speed.KWMAX_120.name());
-            addProperty("type", this::getTransmissionType, this::setTransmissionType, possibleTransmissionType);
+            addProperty(TYPE_PROPERTY, this::getTransmissionType, this::setTransmissionType, possibleTransmissionType);
             addProperty(SPEED_PROPERTY, this::getSpeed, this::setSpeed, possibleSpeed);
         }
     }

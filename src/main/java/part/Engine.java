@@ -13,9 +13,11 @@ public abstract class Engine extends PartImpl{
 
     /** Constant for property name */
     public static final String POWER_PROPERTY = "power";
+    /** Constant for property name */
+    public static final String TYPE_PROPERTY = "type";
 
     /**Enum for all the different engine type */
-    private enum EngineType {
+    public enum EngineType {
         GASOLINE,
         DIESEL,
         GASOLINE_ELECTRIC_HYBRID
@@ -50,7 +52,7 @@ public abstract class Engine extends PartImpl{
      * @param value, the new type
      */
     protected void setEngineType(String value) {
-        assert getAvailablePropertyValues("engine").contains(value);
+        assert getAvailablePropertyValues(TYPE_PROPERTY).contains(value);
         this.engineType = EngineType.valueOf(value);
     }
 
@@ -76,7 +78,7 @@ public abstract class Engine extends PartImpl{
      */
     public static class EG100 extends Engine{
         /**
-         * Constuctor for the instance
+         * Constructor for the instance
          * @param pti, the partType linked to this instance
          */
         public EG100(PartTypeImpl pti) {
@@ -85,7 +87,7 @@ public abstract class Engine extends PartImpl{
             this.power = "100kW";
             this.possibleEngineType = Set.of(EngineType.GASOLINE.name());
             this.possiblePower = Set.of("100kW");
-            addProperty("type", this::getEngineType, this::setEngineType, possibleEngineType);
+            addProperty(TYPE_PROPERTY, this::getEngineType, this::setEngineType, possibleEngineType);
             addProperty(POWER_PROPERTY, this::getPower, this::setPower, possiblePower);
         }
     }
@@ -94,7 +96,7 @@ public abstract class Engine extends PartImpl{
      */
     public static class EG133 extends Engine{
         /**
-         * Constuctor for the instance
+         * Constructor for the instance
          * @param pti, the partType linked to this instance
          */
         public EG133(PartTypeImpl pti) {
@@ -103,7 +105,7 @@ public abstract class Engine extends PartImpl{
             this.power = "133kW";
             this.possibleEngineType = Set.of(EngineType.GASOLINE.name());
             this.possiblePower = Set.of("133kW");
-            addProperty("type", this::getEngineType , this::setEngineType, possibleEngineType);
+            addProperty(TYPE_PROPERTY, this::getEngineType , this::setEngineType, possibleEngineType);
             addProperty(POWER_PROPERTY, this::getPower, this::setPower, possiblePower);
         }
     }
@@ -113,7 +115,7 @@ public abstract class Engine extends PartImpl{
      */
     public static class EG210 extends Engine{
         /**
-         * Constuctor for the instance
+         * Constructor for the instance
          * @param pti, the partType linked to this instance
          */
         public EG210(PartTypeImpl pti) {
@@ -122,7 +124,7 @@ public abstract class Engine extends PartImpl{
             this.power = "210kW";
             this.possibleEngineType = Set.of(EngineType.GASOLINE.name());
             this.possiblePower = Set.of("210kW");
-            addProperty("type", this::getEngineType, this::setEngineType, possibleEngineType);
+            addProperty(TYPE_PROPERTY, this::getEngineType, this::setEngineType, possibleEngineType);
             addProperty(POWER_PROPERTY, this::getPower, this::setPower, possiblePower);
         }
     }
@@ -132,7 +134,7 @@ public abstract class Engine extends PartImpl{
      */
     public static class ED110 extends Engine{
         /**
-         * Constuctor for the instance
+         * Constructor for the instance
          * @param pti, the partType linked to this instance
          */
         public ED110(PartTypeImpl pti) {
@@ -141,7 +143,7 @@ public abstract class Engine extends PartImpl{
             this.power = "110kW";
             this.possibleEngineType = Set.of(EngineType.DIESEL.name());
             this.possiblePower = Set.of("110kW");
-            addProperty("type", this::getEngineType , this::setEngineType, possibleEngineType);
+            addProperty(TYPE_PROPERTY, this::getEngineType , this::setEngineType, possibleEngineType);
             addProperty(POWER_PROPERTY, this::getPower, this::setPower, possiblePower);
         }
     }
@@ -150,7 +152,7 @@ public abstract class Engine extends PartImpl{
      */
     public static class ED180 extends Engine{
         /**
-         * Constuctor for the instance
+         * Constructor for the instance
          * @param pti, the partType linked to this instance
          */
         public ED180(PartTypeImpl pti) {
@@ -159,7 +161,7 @@ public abstract class Engine extends PartImpl{
             this.power = "180kW";
             this.possibleEngineType = Set.of(EngineType.DIESEL.name());
             this.possiblePower = Set.of("180kW");
-            addProperty("type", this::getEngineType , this::setEngineType, possibleEngineType);
+            addProperty(TYPE_PROPERTY, this::getEngineType , this::setEngineType, possibleEngineType);
             addProperty(POWER_PROPERTY, this::getPower, this::setPower, possiblePower);
         }
     }
@@ -169,7 +171,7 @@ public abstract class Engine extends PartImpl{
      */
     public static class EH120 extends Engine{
         /**
-         * Constuctor for the instance
+         * Constructor for the instance
          * @param pti, the partType linked to this instance
          */
         public EH120(PartTypeImpl pti) {
@@ -178,7 +180,7 @@ public abstract class Engine extends PartImpl{
             this.power = "120kW";
             this.possibleEngineType = Set.of(EngineType.GASOLINE_ELECTRIC_HYBRID.name());
             this.possiblePower = Set.of("120kW");
-            addProperty("type", this::getEngineType , this::setEngineType, possibleEngineType);
+            addProperty(TYPE_PROPERTY, this::getEngineType , this::setEngineType, possibleEngineType);
             addProperty(POWER_PROPERTY, this::getPower, this::setPower, possiblePower);
         }
     }
