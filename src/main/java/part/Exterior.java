@@ -1,34 +1,74 @@
 package part;
 
+import api.PartType;
 import impl.PartImpl;
 import impl.PartTypeImpl;
 
+import java.util.Objects;
 import java.util.Set;
 
-public class Exterior extends  PartImpl{
+public abstract class Exterior extends  PartImpl{
 
-    public Exterior(PartTypeImpl pti) {
-        super(pti);
-        addProperty("paint", () -> paint(pti.getName()) , null, Set.of(paint(pti.getName())));
+    private enum PaintColor {
+        CLASSIC,
+        METALLIC,
+        RED
     }
 
-    public String paint(String name){
-        switch (name){
-            case "XC":
-                return "Classic paint";
-            case "XM":
-                return "Metallic paint";
-            case "XS":
-                return "Red paint and sport decoration";
-            default :
-                return null;
+    protected PaintColor paintColor;
+    protected Set<String> possiblePaintColor;
+
+    private Exterior(PartType type) {
+        super(type);
+    }
+
+    protected String getPaintColor() {
+        return paintColor.name();
+    }
+
+    protected void setPaintColor(String value) {
+        assert getAvailablePropertyValues("paint").contains(value);
+        this.paintColor = PaintColor.valueOf(value);
+    }
+
+    public static class XC extends Exterior{
+        public XC(PartTypeImpl pti) {
+            super(pti);
+            this.paintColor = PaintColor.CLASSIC;
+            this.possiblePaintColor = Set.of(PaintColor.CLASSIC.name());
+            addProperty("paint", this::getPaintColor, this::setPaintColor, possiblePaintColor);
         }
     }
 
+    public static class XM extends Exterior{
+        public XM(PartTypeImpl pti) {
+            super(pti);
+            this.paintColor = PaintColor.METALLIC;
+            this.possiblePaintColor = Set.of(PaintColor.METALLIC.name());
+            addProperty("paint", this::getPaintColor, this::setPaintColor, possiblePaintColor);
+        }
+    }
 
+    public static class XS extends Exterior{
+        public XS(PartTypeImpl pti) {
+            super(pti);
+            this.paintColor = PaintColor.RED;
+            this.possiblePaintColor = Set.of(PaintColor.RED.name());
+            addProperty("paint", this::getPaintColor, this::setPaintColor, possiblePaintColor);
+        }
+    }
 
     @Override
     public boolean equals(Object o) {
-        return super.equals(o);
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Exterior exterior = (Exterior) o;
+        return paintColor == exterior.paintColor && Objects.equals(possiblePaintColor, exterior.possiblePaintColor);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), paintColor, possiblePaintColor);
     }
 }

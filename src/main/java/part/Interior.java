@@ -1,34 +1,76 @@
 package part;
 
+import api.PartType;
 import impl.PartImpl;
 import impl.PartTypeImpl;
 
+import java.util.Objects;
 import java.util.Set;
 
-public class Interior extends  PartImpl{
+public abstract class Interior extends  PartImpl{
 
-    public Interior(PartTypeImpl pti) {
-        super(pti);
-        addProperty("finish", () -> finish(pti.getName()) , null, Set.of(finish(pti.getName())));
+    private enum InteriorStyle {
+        STANDARD,
+        HIGH_END,
+        SPORT
     }
 
-    public String finish(String name){
-        switch (name){
-            case "IN":
-                return "Standard interior";
-            case "IH":
-                return "High-end interior";
-            case "IS":
-                return "Sport finish";
-            default :
-                return null;
+    protected InteriorStyle interiorStyle;
+    protected Set<String> possibleInteriorStyle;
+
+
+    private Interior(PartType type) {
+        super(type);
+    }
+
+    protected String getInteriorStyle() {
+        return interiorStyle.name();
+    }
+
+    protected void setInteriorStyle(String value) {
+        assert getAvailablePropertyValues("style").contains(value);
+        this.interiorStyle = InteriorStyle.valueOf(value);
+    }
+
+    public static class IN extends Interior{
+        public IN(PartTypeImpl pti) {
+            super(pti);
+            this.interiorStyle = InteriorStyle.STANDARD;
+            this.possibleInteriorStyle = Set.of(InteriorStyle.STANDARD.name());
+            addProperty("style", this::getInteriorStyle, this::setInteriorStyle, possibleInteriorStyle);
+        }
+    }
+
+    public static class IH extends Interior{
+        public IH(PartTypeImpl pti) {
+            super(pti);
+            this.interiorStyle = InteriorStyle.HIGH_END;
+            this.possibleInteriorStyle = Set.of(InteriorStyle.HIGH_END.name());
+            addProperty("style", this::getInteriorStyle, this::setInteriorStyle, possibleInteriorStyle);
+        }
+    }
+
+    public static class IS extends Interior{
+        public IS(PartTypeImpl pti) {
+            super(pti);
+            this.interiorStyle = InteriorStyle.SPORT;
+            this.possibleInteriorStyle = Set.of(InteriorStyle.SPORT.name());
+            addProperty("style", this::getInteriorStyle, this::setInteriorStyle, possibleInteriorStyle);
         }
     }
 
 
-
     @Override
     public boolean equals(Object o) {
-        return super.equals(o);
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Interior interior = (Interior) o;
+        return interiorStyle == interior.interiorStyle && Objects.equals(possibleInteriorStyle, interior.possibleInteriorStyle);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), interiorStyle, possibleInteriorStyle);
     }
 }

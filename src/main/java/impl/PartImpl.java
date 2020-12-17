@@ -13,7 +13,7 @@ import java.util.function.Supplier;
  */
 public class PartImpl implements Part {
 
-    private PartType type;
+    private final PartType type;
 
     public PartImpl(PartType type) {
         this.type = type;
@@ -56,7 +56,7 @@ public class PartImpl implements Part {
         }
     }
 
-    private Map<String, Property> properties = new HashMap<>();
+    private final Map<String, Property> properties = new HashMap<>();
 
 
 

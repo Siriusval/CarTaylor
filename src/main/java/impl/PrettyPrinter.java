@@ -9,7 +9,7 @@ import java.io.PrintStream;
 
 public class PrettyPrinter implements Visitor {
 
-    private PrintStream output;
+    private final PrintStream output;
 
 
     public PrettyPrinter(PrintStream output) {
@@ -42,7 +42,7 @@ public class PrettyPrinter implements Visitor {
 
         output.println("Part :"+p.getName());
         for(String property : p.getPropertyNames()){
-            output.println("Property :"+property+", Value :"+p.getProperty(property));
+            output.println("Property :"+property+", Value :"+p.getProperty(property).get());
         }
     }
 }

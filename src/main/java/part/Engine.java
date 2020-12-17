@@ -1,58 +1,130 @@
 package part;
 
+import api.PartType;
 import impl.PartImpl;
 import impl.PartTypeImpl;
-
-import java.util.Optional;
+import java.util.Objects;
 import java.util.Set;
 
-public class Engine extends  PartImpl{
+public abstract class Engine extends PartImpl{
 
-    public Engine(PartTypeImpl pti) {
-        super(pti);
-        addProperty("type", () -> type(pti.getName()) , null, Set.of(type(pti.getName())));
-        addProperty("power", () -> power(pti.getName()) , null, Set.of(power(pti.getName())));
+    private enum EngineType {
+        GASOLINE,
+        DIESEL,
+        GASOLINE_ELECTRIC_HYBRID
     }
 
-    public String type(String name){
-        switch (name){
-            case "EG100":
-            case "EG133":
-            case "EG210":
-                return "Gasoline";
-            case "ED110":
-            case "ED180":
-                return "Diesel";
-            case "EH120":
-                return "Gasoline/electric hybrid";
-            default :
-                return null;
+    protected EngineType engineType;
+    protected String power;
+    protected Set<String> possibleEngineType;
+    protected Set<String> possiblePower ;
+
+    private Engine(PartType type) {
+        super(type);
+    }
+
+    protected String getEngineType() {
+        return engineType.name();
+    }
+
+    protected void setEngineType(String value) {
+        assert getAvailablePropertyValues("engine").contains(value);
+        this.engineType = EngineType.valueOf(value);
+    }
+
+    protected String getPower() {
+        return power;
+    }
+
+    protected void setPower(String value) {
+        assert getAvailablePropertyValues("power").contains(value);
+        this.power = value;
+    }
+
+
+    public static class EG100 extends Engine{
+        public EG100(PartTypeImpl pti) {
+            super(pti);
+            this.engineType = EngineType.GASOLINE;
+            this.power = "100kW";
+            this.possibleEngineType = Set.of(EngineType.GASOLINE.name());
+            this.possiblePower = Set.of("100kW");
+            addProperty("type", this::getEngineType, this::setEngineType, possibleEngineType);
+            addProperty("power", this::getPower, this::setPower, possiblePower);
         }
     }
 
-    public String power(String name){
-        switch (name){
-            case "EG100":
-                return "100kW";
-            case "EG133":
-                return "133kW";
-            case "EG210":
-                return "210kW";
-            case "ED110":
-                return "110kW";
-            case "ED180":
-                return "180kW";
-            case "EH120":
-                return "120kW";
-            default :
-                return null;
+    public static class EG133 extends Engine{
+        public EG133(PartTypeImpl pti) {
+            super(pti);
+            this.engineType = EngineType.GASOLINE;
+            this.power = "133kW";
+            this.possibleEngineType = Set.of(EngineType.GASOLINE.name());
+            this.possiblePower = Set.of("133kW");
+            addProperty("type", this::getEngineType , this::setEngineType, possibleEngineType);
+            addProperty("power", this::getPower, this::setPower, possiblePower);
         }
     }
 
+    public static class EG210 extends Engine{
+        public EG210(PartTypeImpl pti) {
+            super(pti);
+            this.engineType = EngineType.GASOLINE;
+            this.power = "210kW";
+            this.possibleEngineType = Set.of(EngineType.GASOLINE.name());
+            this.possiblePower = Set.of("210kW");
+            addProperty("type", this::getEngineType, this::setEngineType, possibleEngineType);
+            addProperty("power", this::getPower, this::setPower, possiblePower);
+        }
+    }
 
+    public static class ED110 extends Engine{
+        public ED110(PartTypeImpl pti) {
+            super(pti);
+            this.engineType = EngineType.DIESEL;
+            this.power = "110kW";
+            this.possibleEngineType = Set.of(EngineType.DIESEL.name());
+            this.possiblePower = Set.of("110kW");
+            addProperty("type", this::getEngineType , this::setEngineType, possibleEngineType);
+            addProperty("power", this::getPower, this::setPower, possiblePower);
+        }
+    }
+
+    public static class ED180 extends Engine{
+        public ED180(PartTypeImpl pti) {
+            super(pti);
+            this.engineType = EngineType.DIESEL;
+            this.power = "180kW";
+            this.possibleEngineType = Set.of(EngineType.DIESEL.name());
+            this.possiblePower = Set.of("180kW");
+            addProperty("type", this::getEngineType , this::setEngineType, possibleEngineType);
+            addProperty("power", this::getPower, this::setPower, possiblePower);
+        }
+    }
+
+    public static class EH120 extends Engine{
+        public EH120(PartTypeImpl pti) {
+            super(pti);
+            this.engineType = EngineType.GASOLINE_ELECTRIC_HYBRID;
+            this.power = "120kW";
+            this.possibleEngineType = Set.of(EngineType.GASOLINE_ELECTRIC_HYBRID.name());
+            this.possiblePower = Set.of("120kW");
+            addProperty("type", this::getEngineType , this::setEngineType, possibleEngineType);
+            addProperty("power", this::getPower, this::setPower, possiblePower);
+        }
+    }
 
     @Override
     public boolean equals(Object o) {
-        return super.equals(o);
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Engine engine = (Engine) o;
+        return engineType == engine.engineType && Objects.equals(power, engine.power) && Objects.equals(possibleEngineType, engine.possibleEngineType) && Objects.equals(possiblePower, engine.possiblePower);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), engineType, power, possibleEngineType, possiblePower);
     }
 }

@@ -1,6 +1,7 @@
 package impl;
 
 import api.*;
+import part.Interior;
 
 import java.util.Collections;
 import java.util.HashSet;
@@ -54,12 +55,12 @@ public class ConfiguratorImpl implements Configurator {
 
         //Variants
         //Engine parts
-        PartType EG100 = new PartTypeImpl("EG100",part.Engine.class,engineCategory);
-        PartType EG133 = new PartTypeImpl("EG133",part.Engine.class,engineCategory);
-        PartType EG210 = new PartTypeImpl("EG210",part.Engine.class,engineCategory);
-        PartType ED110 = new PartTypeImpl("ED110",part.Engine.class,engineCategory);
-        PartType ED180 = new PartTypeImpl("ED180",part.Engine.class,engineCategory);
-        PartType EH120 = new PartTypeImpl("EH120",part.Engine.class,engineCategory);
+        PartType EG100 = new PartTypeImpl("EG100",part.Engine.EG100.class,engineCategory);
+        PartType EG133 = new PartTypeImpl("EG133",part.Engine.EG133.class,engineCategory);
+        PartType EG210 = new PartTypeImpl("EG210",part.Engine.EG210.class,engineCategory);
+        PartType ED110 = new PartTypeImpl("ED110",part.Engine.ED110.class,engineCategory);
+        PartType ED180 = new PartTypeImpl("ED180",part.Engine.ED180.class,engineCategory);
+        PartType EH120 = new PartTypeImpl("EH120",part.Engine.EH120.class,engineCategory);
         variants.add(EG100);
         variants.add(EG133);
         variants.add(EG210);
@@ -68,12 +69,12 @@ public class ConfiguratorImpl implements Configurator {
         variants.add(EH120);
 
         //Transmission parts
-        PartType TM5 = new PartTypeImpl("TM5",part.Transmission.class, transmissionCategory);
-        PartType TM6 = new PartTypeImpl("TM6",part.Transmission.class,transmissionCategory);
-        PartType TA5 = new PartTypeImpl("TA5",part.Transmission.class,transmissionCategory);
-        PartType TS6 = new PartTypeImpl("TS6",part.Transmission.class,transmissionCategory);
-        PartType TSF7 = new PartTypeImpl("TSF7",part.Transmission.class,transmissionCategory);
-        PartType TC120 = new PartTypeImpl("TC120",part.Transmission.class,transmissionCategory);
+        PartType TM5 = new PartTypeImpl("TM5",part.Transmission.TM5.class, transmissionCategory);
+        PartType TM6 = new PartTypeImpl("TM6",part.Transmission.TM6.class,transmissionCategory);
+        PartType TA5 = new PartTypeImpl("TA5",part.Transmission.TA5.class,transmissionCategory);
+        PartType TS6 = new PartTypeImpl("TS6",part.Transmission.TS6.class,transmissionCategory);
+        PartType TSF7 = new PartTypeImpl("TSF7",part.Transmission.TSF7.class,transmissionCategory);
+        PartType TC120 = new PartTypeImpl("TC120",part.Transmission.TC120.class,transmissionCategory);
         variants.add(TM5);
         variants.add(TM6);
         variants.add(TA5);
@@ -82,17 +83,17 @@ public class ConfiguratorImpl implements Configurator {
         variants.add(TC120);
 
         //Exterior parts
-        PartType XC = new PartTypeImpl("XC",part.Exterior.class,exteriorCategory);
-        PartType XM = new PartTypeImpl("XM",part.Exterior.class,exteriorCategory);
-        PartType XS = new PartTypeImpl("XS",part.Exterior.class,exteriorCategory);
+        PartType XC = new PartTypeImpl("XC",part.Exterior.XC.class,exteriorCategory);
+        PartType XM = new PartTypeImpl("XM",part.Exterior.XM.class,exteriorCategory);
+        PartType XS = new PartTypeImpl("XS",part.Exterior.XS.class,exteriorCategory);
         variants.add(XC);
         variants.add(XM);
         variants.add(XS);
 
         //Interior parts
-        PartType IN = new PartTypeImpl("IN",part.Interior.class,interiorCategory);
-        PartType IH = new PartTypeImpl("IH",part.Interior.class,interiorCategory);
-        PartType IS = new PartTypeImpl("IS",part.Interior.class,interiorCategory);
+        PartType IN = new PartTypeImpl("IN",part.Interior.IN.class,interiorCategory);
+        PartType IH = new PartTypeImpl("IH",part.Interior.IH.class,interiorCategory);
+        PartType IS = new PartTypeImpl("IS",part.Interior.IS.class,interiorCategory);
         variants.add(IN);
         variants.add(IH);
         variants.add(IS);

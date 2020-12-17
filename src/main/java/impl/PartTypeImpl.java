@@ -19,7 +19,7 @@ public class PartTypeImpl implements PartType {
     /** Name of the partType */
     private final String name;
 
-    private Class<? extends PartImpl> classRef;
+    private final Class<? extends PartImpl> classRef;
 
     /** Category of the partType */
     private final Category category;
@@ -45,7 +45,7 @@ public class PartTypeImpl implements PartType {
     public PartImpl newInstance() {
         Constructor<? extends PartImpl> constructor;
         try {
-            Class[] cArg = {PartTypeImpl.class};
+            Class [] cArg = {PartTypeImpl.class};
             constructor = classRef.getConstructor(cArg);
 
             return constructor.newInstance(this);
