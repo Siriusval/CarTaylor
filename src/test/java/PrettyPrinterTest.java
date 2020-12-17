@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class PrettyPrinterTest {
 
@@ -58,25 +59,29 @@ public class PrettyPrinterTest {
 
 
 
-        final String expected  = "Category : engine\n" +
+        final String expectedCategory  = "Category : engine\n" +
                 "PartType :EG100\n" +
                 "Part :part.Engine$EG100\n" +
                 "Property :power, Value :100kW\n" +
-                "Property :type, Value :GASOLINE\n" +
-                "Category : exterior\n" +
+                "Property :type, Value :GASOLINE\n";
+        final String expectedExterior  ="Category : exterior\n" +
                 "PartType :XC\n" +
                 "Part :part.Exterior$XC\n" +
-                "Property :paint, Value :CLASSIC\n" +
-                "Category : transmission\n" +
+                "Property :paint, Value :CLASSIC\n";
+        final String expectedTransmission  = "Category : transmission\n" +
                 "PartType :TM5\n" +
                 "Part :part.Transmission$TM5\n" +
                 "Property :type, Value :MANUAL\n" +
-                "Property :speed, Value :GEAR_5\n" +
-                "Category : interior\n" +
+                "Property :speed, Value :GEAR_5\n";
+        final String expectedInterior  =  "Category : interior\n" +
                 "PartType :IN\n" +
                 "Part :part.Interior$IN\n" +
                 "Property :style, Value :STANDARD\n";
-        assertEquals(normalizeLineEnds(expected), normalizeLineEnds(os.toString("UTF-8")));
+
+        assertTrue(normalizeLineEnds(os.toString("UTF-8")).contains(expectedCategory));
+        assertTrue(normalizeLineEnds(os.toString("UTF-8")).contains(expectedExterior));
+        assertTrue(normalizeLineEnds(os.toString("UTF-8")).contains(expectedTransmission));
+        assertTrue(normalizeLineEnds(os.toString("UTF-8")).contains(expectedInterior));
     }
 
     /**
