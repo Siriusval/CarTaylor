@@ -18,8 +18,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  */
 class PartTypeTest {
 
+    /** Logger to print details in console*/
     public static Logger log ;
 
+    /**
+     * Setup before all tests
+     */
     @BeforeAll
     public static void setup() {
         log = Logger.getLogger(PartTypeTest.class.getName());

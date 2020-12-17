@@ -1,8 +1,6 @@
     package api;
 
 
-import impl.Visitor;
-
 import java.util.Optional;
 import java.util.Set;
 
@@ -62,5 +60,9 @@ public interface Configuration {
      */
     void clear();
 
+    /**
+     * Accept visitor
+     * @param visitor, the visitor to accept
+     */
     void accept(Visitor visitor);
 }

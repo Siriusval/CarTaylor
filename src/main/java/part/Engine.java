@@ -6,45 +6,79 @@ import impl.PartTypeImpl;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * Class that regroup all the templates for the engine instances
+ */
 public abstract class Engine extends PartImpl{
 
+    /** Constant for property name */
     public static final String POWER_PROPERTY = "power";
 
+    /**Enum for all the different engine type */
     private enum EngineType {
         GASOLINE,
         DIESEL,
         GASOLINE_ELECTRIC_HYBRID
     }
-
+    /** Engine type */
     protected EngineType engineType;
+    /** Engine power */
     protected String power;
+    /** Possible Engine types */
     protected Set<String> possibleEngineType;
+    /** Possible Engine powers */
     protected Set<String> possiblePower ;
 
+    /**
+     * Constructor for engine
+     * @param type, the original partType
+     */
     private Engine(PartType type) {
         super(type);
     }
 
+    /**
+     * Get the type of the engine
+     * @return the engine Type
+     */
     protected String getEngineType() {
         return engineType.name();
     }
 
+    /**
+     * Set the new engine type
+     * @param value, the new type
+     */
     protected void setEngineType(String value) {
         assert getAvailablePropertyValues("engine").contains(value);
         this.engineType = EngineType.valueOf(value);
     }
 
+    /**
+     * Get the power of the engine
+     * @return the power
+     */
     protected String getPower() {
         return power;
     }
 
+    /**
+     * Set the new power of the engine
+     * @param value, the new value
+     */
     protected void setPower(String value) {
         assert getAvailablePropertyValues(POWER_PROPERTY).contains(value);
         this.power = value;
     }
 
-
+    /**
+     * Class that represents an EG100 instance
+     */
     public static class EG100 extends Engine{
+        /**
+         * Constuctor for the instance
+         * @param pti, the partType linked to this instance
+         */
         public EG100(PartTypeImpl pti) {
             super(pti);
             this.engineType = EngineType.GASOLINE;
@@ -55,8 +89,14 @@ public abstract class Engine extends PartImpl{
             addProperty(POWER_PROPERTY, this::getPower, this::setPower, possiblePower);
         }
     }
-
+    /**
+     * Class that represents an EG133 instance
+     */
     public static class EG133 extends Engine{
+        /**
+         * Constuctor for the instance
+         * @param pti, the partType linked to this instance
+         */
         public EG133(PartTypeImpl pti) {
             super(pti);
             this.engineType = EngineType.GASOLINE;
@@ -68,7 +108,14 @@ public abstract class Engine extends PartImpl{
         }
     }
 
+    /**
+     * Class that represents an EG120 instance
+     */
     public static class EG210 extends Engine{
+        /**
+         * Constuctor for the instance
+         * @param pti, the partType linked to this instance
+         */
         public EG210(PartTypeImpl pti) {
             super(pti);
             this.engineType = EngineType.GASOLINE;
@@ -80,7 +127,14 @@ public abstract class Engine extends PartImpl{
         }
     }
 
+    /**
+     * Class that represents an ED110 instance
+     */
     public static class ED110 extends Engine{
+        /**
+         * Constuctor for the instance
+         * @param pti, the partType linked to this instance
+         */
         public ED110(PartTypeImpl pti) {
             super(pti);
             this.engineType = EngineType.DIESEL;
@@ -91,8 +145,14 @@ public abstract class Engine extends PartImpl{
             addProperty(POWER_PROPERTY, this::getPower, this::setPower, possiblePower);
         }
     }
-
+    /**
+     * Class that represents an ED180 instance
+     */
     public static class ED180 extends Engine{
+        /**
+         * Constuctor for the instance
+         * @param pti, the partType linked to this instance
+         */
         public ED180(PartTypeImpl pti) {
             super(pti);
             this.engineType = EngineType.DIESEL;
@@ -104,7 +164,14 @@ public abstract class Engine extends PartImpl{
         }
     }
 
+    /**
+     * Class that represents an EH120 instance
+     */
     public static class EH120 extends Engine{
+        /**
+         * Constuctor for the instance
+         * @param pti, the partType linked to this instance
+         */
         public EH120(PartTypeImpl pti) {
             super(pti);
             this.engineType = EngineType.GASOLINE_ELECTRIC_HYBRID;

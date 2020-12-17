@@ -1,7 +1,5 @@
 package api;
 
-import impl.Visitor;
-
 /**
  * Interface Category<br>
  * A public type to organize part types in categories<br>
@@ -16,6 +14,9 @@ public interface Category {
      */
     String getName();
 
-
+    /**
+     * Accept visitor
+     * @param v, the isitor to accept
+     */
     void accept(Visitor v);
 }

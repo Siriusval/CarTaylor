@@ -2,10 +2,9 @@ import api.Category;
 import api.Configuration;
 import api.Configurator;
 import api.PartType;
-import impl.ConfigurationImpl;
 import impl.ConfiguratorImpl;
 import impl.PrettyPrinter;
-import impl.Visitor;
+import api.Visitor;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -19,6 +18,9 @@ import java.util.logging.Logger;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+/**
+ * Class test for PrettyPrinter (print details of the configuration)
+ */
 class PrettyPrinterTest {
 
     /**
@@ -26,13 +28,19 @@ class PrettyPrinterTest {
      */
     public static Logger log ;
 
-
+    /**
+     * Setup before all tests
+     */
     @BeforeAll
     public static void setup() {
         log = Logger.getLogger(CategoryTest.class.getName());
         log.info("@BeforeAll");
     }
 
+    /**
+     * Test the prettyPrinter on a test configuration
+     * @throws UnsupportedEncodingException _
+     */
     @Test
     void testPrettyPrinter() throws UnsupportedEncodingException {
 
@@ -85,9 +93,10 @@ class PrettyPrinterTest {
     }
 
     /**
+     * Normalize the a unique type of end line<br>
      * CRLF, CR -> LF
-     * @param s
-     * @return
+     * @param s, the string to normalize
+     * @return the string with all the same endlines
      */
     private static String normalizeLineEnds(String s) {
         return s.replace("\r\n", "\n").replace('\r', '\n');

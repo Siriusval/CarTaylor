@@ -1,9 +1,6 @@
 package impl;
 
-import api.Category;
-import api.Configuration;
-import api.Part;
-import api.PartType;
+import api.*;
 
 import java.util.*;
 

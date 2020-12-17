@@ -3,18 +3,24 @@ package impl;
 import api.Category;
 import api.Part;
 import api.PartType;
+import api.Visitor;
 
 import java.util.*;
 import java.util.function.Consumer;
 import java.util.function.Supplier;
 
-/*
- * Snippet to add a basic implementation of PropertyManager
+/**
+ * Represent a Part, an instance of a PartImpl
  */
 public class PartImpl implements Part {
 
+    /** The original PartType */
     private final PartType type;
 
+    /**
+     * Constructor for PartImpl
+     * @param type, the linked PartType
+     */
     public PartImpl(PartType type) {
         this.type = type;
     }
@@ -30,10 +36,19 @@ public class PartImpl implements Part {
     }
 
     private class Property {
+        /** Getter for property*/
         public final Supplier<String> getter;
+        /** Setter for property*/
         public final Consumer<String> setter;
+        /** Possible values for property*/
         public final Set<String> possibleValues;
 
+        /**
+         * Constructor for Property
+         * @param getter, the getter for the property
+         * @param setter, the setter for the property
+         * @param possibleValues, available values for this property
+         */
         Property(Supplier<String> getter, Consumer<String> setter, Set<String> possibleValues) {
             this.getter = getter;
             this.setter = setter;
@@ -56,10 +71,17 @@ public class PartImpl implements Part {
         }
     }
 
+    /** List of properties for the partImpl*/
     private final Map<String, Property> properties = new HashMap<>();
 
 
-
+    /**
+     * Add a property to the instance
+     * @param name, name of the property
+     * @param getter, getter method to get the property
+     * @param setter, setter method to change the property
+     * @param possibleValues, set of possible values
+     */
     protected void addProperty(String name, Supplier<String> getter, Consumer<String> setter,
                                Set<String> possibleValues) {
         properties.put(name, new Property(getter, setter, possibleValues));

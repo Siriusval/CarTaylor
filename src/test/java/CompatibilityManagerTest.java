@@ -17,21 +17,32 @@ import java.util.logging.Logger;
  */
 class CompatibilityManagerTest {
 
+    /** Logger to print test steps in console */
     public static Logger log ;
+    /** The cm to test */
     public static CompatibilityManager cm;
 
-    //Parts to use while testing
+    /** Part to use while testing */
     public PartType EG100;
+    /** Part to use while testing */
     public PartType ED180;
+    /** Part to use while testing */
     public PartType XS;
+    /** Part to use while testing */
     public PartType IS;
 
+    /**
+     * Setup method executed before all tests
+     */
     @BeforeAll
     public static void setup() {
         log = Logger.getLogger(CompatibilityManagerTest.class.getName());
         log.info("@BeforeAll - executes once before all test methods in this class");
     }
 
+    /**
+     * Setup method before each test
+     */
     @BeforeEach
     public void init() {
         log.info("@BeforeEach - executes before each test method in this class");

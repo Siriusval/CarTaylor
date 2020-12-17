@@ -1,7 +1,5 @@
 package api;
 
-import impl.Visitor;
-
 /**
  * Interface of PartType<br>
  * Contains the methods to implement in PartType<br>
@@ -21,5 +19,9 @@ public interface PartType {
      */
     Category getCategory();
 
+    /**
+     * Accept a visitor
+     * @param v, the visitor
+     */
     void accept(Visitor v);
 }

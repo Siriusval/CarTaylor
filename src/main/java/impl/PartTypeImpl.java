@@ -2,6 +2,7 @@ package impl;
 
 import api.Category;
 import api.PartType;
+import api.Visitor;
 
 import java.lang.reflect.Constructor;
 import java.util.Objects;
@@ -19,6 +20,7 @@ public class PartTypeImpl implements PartType {
     /** Name of the partType */
     private final String name;
 
+    /** Template for the PartImpl instantiation */
     private final Class<? extends PartImpl> classRef;
 
     /** Category of the partType */
@@ -27,6 +29,7 @@ public class PartTypeImpl implements PartType {
     /**
      * Constructor for partTypes
      * @param name, the name of the partType
+     * @param classRef, the class template to create a new instance
      * @param category, the category of the partType
      */
     public PartTypeImpl(String name, Class<? extends PartImpl> classRef, Category category) {
@@ -42,6 +45,10 @@ public class PartTypeImpl implements PartType {
         this.category = category;
     }
 
+    /**
+     * Create a new instance of a partImpl
+     * @return the new instance
+     */
     public PartImpl newInstance() {
         Constructor<? extends PartImpl> constructor;
         try {

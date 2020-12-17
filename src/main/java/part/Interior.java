@@ -7,34 +7,59 @@ import impl.PartTypeImpl;
 import java.util.Objects;
 import java.util.Set;
 
+/**
+ * Class that represents all the different interior Parts (for instantiation)
+ */
 public abstract class Interior extends  PartImpl{
 
+    /** Constant for property name */
     public static final String STYLE_PROPERTY = "style";
 
+    /**Enum for all the different interior styles */
     private enum InteriorStyle {
         STANDARD,
         HIGH_END,
         SPORT
     }
 
+    /** Interior style */
     protected InteriorStyle interiorStyle;
+    /** Possible Interior styles */
     protected Set<String> possibleInteriorStyle;
 
-
+    /**
+     * Constructor for the interior partImpl
+     * @param type the linked partType
+     */
     private Interior(PartType type) {
         super(type);
     }
 
+    /**
+     * Get interior style
+     * @return the interiorStyle
+     */
     protected String getInteriorStyle() {
         return interiorStyle.name();
     }
 
+    /**
+     * Set interiorStyle
+     * @param value, the new value
+     */
     protected void setInteriorStyle(String value) {
         assert getAvailablePropertyValues(STYLE_PROPERTY).contains(value);
         this.interiorStyle = InteriorStyle.valueOf(value);
     }
 
+    /**
+     * Model for the IN instance
+     */
     public static class IN extends Interior{
+        /**
+         * Constuctor for the instance
+         * @param pti, the partType linked to this instance
+         */
         public IN(PartTypeImpl pti) {
             super(pti);
             this.interiorStyle = InteriorStyle.STANDARD;
@@ -43,7 +68,14 @@ public abstract class Interior extends  PartImpl{
         }
     }
 
+    /**
+     * Model for the IH instance
+     */
     public static class IH extends Interior{
+        /**
+         * Constuctor for the instance
+         * @param pti, the partType linked to this instance
+         */
         public IH(PartTypeImpl pti) {
             super(pti);
             this.interiorStyle = InteriorStyle.HIGH_END;
@@ -52,7 +84,14 @@ public abstract class Interior extends  PartImpl{
         }
     }
 
+    /**
+     * Model for the IS instance
+     */
     public static class IS extends Interior{
+        /**
+         * Constuctor for the instance
+         * @param pti, the partType linked to this instance
+         */
         public IS(PartTypeImpl pti) {
             super(pti);
             this.interiorStyle = InteriorStyle.SPORT;

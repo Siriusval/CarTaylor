@@ -1,18 +1,22 @@
 package impl;
 
-import api.Category;
-import api.Configuration;
-import api.Part;
-import api.PartType;
+import api.*;
 
 import java.io.PrintStream;
 import java.util.Optional;
 
+/**
+ * Print the configuration, using a visitor pattern
+ */
 public class PrettyPrinter implements Visitor {
 
+    /** Output to collect the configuration details */
     private final PrintStream output;
 
-
+    /**
+     * Constructor for pretty printer
+     * @param output, the output stream
+     */
     public PrettyPrinter(PrintStream output) {
         this.output = output;
     }

@@ -20,7 +20,9 @@ class CategoryTest {
      */
     public static Logger log ;
 
-
+    /**
+     * Setup method executed before all test
+     */
     @BeforeAll
     public static void setup() {
         log = Logger.getLogger(CategoryTest.class.getName());

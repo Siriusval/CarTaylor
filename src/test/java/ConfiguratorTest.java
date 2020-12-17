@@ -18,9 +18,14 @@ import java.util.logging.Logger;
  */
 class ConfiguratorTest {
 
-    private static Logger log ;
+    /** Logger to print test steps in console */
+    public static Logger log ;
+    /** The configurator to test */
     private static Configurator configurator;
 
+    /**
+     * Setup method before all tests
+     */
     @BeforeAll
     public static void setup(){
         log = Logger.getLogger(ConfiguratorTest.class.getName());

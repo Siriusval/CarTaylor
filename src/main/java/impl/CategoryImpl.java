@@ -1,6 +1,8 @@
 package impl;
 
 import api.Category;
+import api.Visitor;
+
 import java.util.Objects;
 
 /**

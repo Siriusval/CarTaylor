@@ -41,6 +41,9 @@ public class ConfiguratorImpl implements Configurator {
         this.configuration = new ConfigurationImpl(this, selectedParts);
     }
 
+    /**
+     * Init method to create an test environment with all parts created
+     */
     private void init(){
         //Categories
         Category engineCategory = new CategoryImpl("engine");

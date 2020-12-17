@@ -26,7 +26,9 @@ class ConfigurationTest {
     /** Shortcut to configurator.getConfiguration()*/
     private static Configuration configuration;
 
-
+    /**
+     * Setup method before all tests
+     */
     @BeforeAll
     public static void setup(){
         log = Logger.getLogger(ConfigurationTest.class.getName());

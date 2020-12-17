@@ -20,8 +20,11 @@ import java.util.Set;
  */
 public class CompatibilityManagerImpl implements CompatibilityManager  {
 
+    /** Constant for exception message */
     public static final String REFERENCE_CANNOT_BE_NULL = "reference cannot be null";
+    /** Constant for exception message */
     public static final String TARGET_CANNOT_BE_NULL = "target cannot be null";
+    /** Constant for exception message */
     public static final String TARGET_CANNOT_BE_EMPTY = "target cannot be empty";
     /** Graph that represents the requirements between parts */
     protected final Graph<PartType, DefaultEdge> requirements;
